@@ -16,8 +16,8 @@ public class RecipesFrame extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
 
-        // Set background color
-        getContentPane().setBackground(new Color(173, 216, 230)); // Light blue color
+
+        getContentPane().setBackground(new Color(109,113,46));
 
         // Create a JLabel for the title
         JLabel titleLabel = new JLabel("Here are some recipes that you may like, " + playerName);

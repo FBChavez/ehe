@@ -8,12 +8,12 @@ public class WelcomeFrame extends JFrame {
     public WelcomeFrame() {
         setTitle("Merry Christmas Greeting");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1024, 576);
+        setSize(1122, 793);
         setResizable(false);
         setLocationRelativeTo(null);
 
         // Create a JLabel to hold the GIF
-        ImageIcon gifIcon = new ImageIcon("merry_christmas.gif");
+        ImageIcon gifIcon = new ImageIcon("bg.gif");
         JLabel gifLabel = new JLabel(gifIcon);
 
         // Set the content pane to the JLabel
@@ -21,15 +21,15 @@ public class WelcomeFrame extends JFrame {
 
         // Create and add components
         JButton enterButton = new JButton("Enter Realm");
-        enterButton.setBackground(Color.lightGray);
+        enterButton.setBackground(new Color(109,113,46));
         enterButton.setForeground(Color.WHITE);
         enterButton.setFont(new Font("Arial", Font.BOLD, 18));
 
         // Create a JLabel for the welcome text
-        JLabel welcomeLabel = new JLabel("Welcome to Winter Wonderland!");
+        //JLabel welcomeLabel = new JLabel("Welcome to Winter Wonderland!");
 //        welcomeLabel.setFont(new Font("Bigbone Font", Font.BOLD, 72));
-        welcomeLabel.setFont(new Font("Harrington", Font.BOLD, 48));
-        welcomeLabel.setForeground(Color.WHITE);
+//        welcomeLabel.setFont(new Font("Harrington", Font.BOLD, 48));
+//        welcomeLabel.setForeground(Color.WHITE);
 
         enterButton.addActionListener(new ActionListener() {
             @Override
@@ -54,10 +54,10 @@ public class WelcomeFrame extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(50, 0, 0, 0); // Adjusted top inset
-        panel.add(welcomeLabel, gbc);
+//        panel.add(welcomeLabel, gbc);
 
-        gbc.gridy = 1;
-        gbc.insets = new Insets(20, 0, 0, 0); // Adjusted top inset
+//        gbc.gridy = 1;
+//        gbc.insets = new Insets(20, 0, 0, 0); // Adjusted top inset
         panel.add(enterButton, gbc);
 
         // Set the content pane to the JPanel
