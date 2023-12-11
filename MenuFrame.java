@@ -71,7 +71,7 @@ public class MenuFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 DecorateFrame decorateFrame = new DecorateFrame(name);
-                decorateFrame.setVisible(true);
+//                decorateFrame.setVisible(true);
             }
         });
 
