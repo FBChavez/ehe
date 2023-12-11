@@ -27,40 +27,43 @@ public class MenuFrame extends JFrame {
 
         // Create buttons with equal size
 
-        //JButton decorateButton = createButton("Decorate Virtual Christmas Tree");
-        JButton decorateButton = createButton();
-        ImageIcon decorBtn = new ImageIcon("iconBTN/decorate.png");
-        Image im1 = decorBtn.getImage();
-        Image im2 = im1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
-        decorateButton.setIcon(new ImageIcon(im2));
-
-        JButton recipesButton = createButton();
-        ImageIcon recipeBtn = new ImageIcon("iconBTN/recipe.png");
-        Image r1 = recipeBtn.getImage();
-        Image r2 = r1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
-        recipesButton.setIcon(new ImageIcon(r2));
-
-        JButton songsButton = createButton();
-        ImageIcon songsBtn = new ImageIcon("iconBTN/songs.png");
-        Image s1 = songsBtn.getImage();
-        Image s2 = s1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
-        songsButton.setIcon(new ImageIcon(s2));
-
-        JButton exchangeButton = createButton();
-        ImageIcon echBtn = new ImageIcon("iconBTN/manito.png");
-        Image e1 = echBtn.getImage();
-        Image e2 = e1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
-        exchangeButton.setIcon(new ImageIcon(e2));
-
-        JButton rpgButton = createButton();
-        ImageIcon gameBtn = new ImageIcon("iconBTN/adventure.png");
-        Image g1 = gameBtn.getImage();
-        Image g2 = g1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
-        rpgButton.setIcon(new ImageIcon(g2));
+//        JButton decorateButton = createButton("Decorate Virtual Christmas Tree");
 //        JButton recipesButton = createButton("Look for Christmas Recipes");
 //        JButton songsButton = createButton("Play Christmas Songs");
 //        JButton exchangeButton = createButton("Exchange Gifts");
 //        JButton rpgButton = createButton("Start an adventure");
+
+
+
+        JButton decorateButton = createButton();
+        ImageIcon decorBtn = new ImageIcon("iconBTN/decorate.png");
+        Image imageD1 = decorBtn.getImage();
+        Image imageD2 = imageD1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
+        decorateButton.setIcon(new ImageIcon(imageD2));
+
+        JButton recipesButton = createButton();
+        ImageIcon recipeBtn = new ImageIcon("iconBTN/recipe.png");
+        Image imageR1 = recipeBtn.getImage();
+        Image imageR2 = imageR1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
+        recipesButton.setIcon(new ImageIcon(imageR2));
+
+        JButton songsButton = createButton();
+        ImageIcon songsBtn = new ImageIcon("iconBTN/songs.png");
+        Image imageS1 = songsBtn.getImage();
+        Image imageS2 = imageS1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
+        songsButton.setIcon(new ImageIcon(imageS2));
+
+        JButton exchangeButton = createButton();
+        ImageIcon echBtn = new ImageIcon("iconBTN/manito.png");
+        Image imageE1 = echBtn.getImage();
+        Image imageE2 = imageE1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
+        exchangeButton.setIcon(new ImageIcon(imageE2));
+
+        JButton rpgButton = createButton();
+        ImageIcon gameBtn = new ImageIcon("iconBTN/adventure.png");
+        Image imageG1 = gameBtn.getImage();
+        Image imageG2 = imageG1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
+        rpgButton.setIcon(new ImageIcon(imageG2));
 
         // Add ActionListener to buttons
         decorateButton.addActionListener(new ActionListener() {

@@ -20,10 +20,11 @@ public class WelcomeFrame extends JFrame {
         setContentPane(gifLabel);
 
         // Create and add components
-        JButton enterButton = new JButton("Enter Realm");
-        enterButton.setBackground(new Color(109,113,46));
-        enterButton.setForeground(Color.WHITE);
+        JButton enterButton = new JButton("Enter Christmas Realm");
+        enterButton.setBackground(new Color(226,217,202));
+        enterButton.setForeground(new Color(88,66,63));
         enterButton.setFont(new Font("Arial", Font.BOLD, 18));
+        enterButton.setPreferredSize(new Dimension(250, 50));
 
         // Create a JLabel for the welcome text
         //JLabel welcomeLabel = new JLabel("Welcome to Winter Wonderland!");
