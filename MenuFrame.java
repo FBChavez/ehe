@@ -38,7 +38,7 @@ public class MenuFrame extends JFrame {
         JButton decorateButton = createButton();
         ImageIcon decorBtn = new ImageIcon("iconBTN/decorate.png");
         Image imageD1 = decorBtn.getImage();
-        Image imageD2 = imageD1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
+        Image imageD2 = imageD1.getScaledInstance(300, 60, Image.SCALE_SMOOTH);
         decorateButton.setIcon(new ImageIcon(imageD2));
 
         JButton recipesButton = createButton();

@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RecipeFrame extends JFrame {
 
@@ -19,11 +21,21 @@ public class RecipeFrame extends JFrame {
     public RecipeFrame(String name) {
         this.playerName = name;
 
+
         setTitle("Christmas Recipes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 675);
         setResizable(false);
         setLocationRelativeTo(null);
         setContentPane(jPanel);
+        backToRecipePageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                MenuFrame menuFrame = new MenuFrame(name);
+                menuFrame.setVisible(true);
+            }
+        });
     }
+
 }

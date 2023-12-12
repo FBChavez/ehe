@@ -6,7 +6,8 @@
       <xy x="14" y="21" width="582" height="483"/>
     </constraints>
     <properties>
-      <background color="-1"/>
+      <background color="-264983"/>
+      <enabled value="true"/>
     </properties>
     <border type="none" title=""/>
     <children>
@@ -24,10 +25,10 @@
           <component id="a7616" class="javax.swing.JTextPane" binding="descriptionTP">
             <constraints/>
             <properties>
-              <background color="-5049675"/>
+              <background color="-13353161"/>
               <editable value="false"/>
               <font name="Constantia" size="12" style="0"/>
-              <foreground color="-15902463"/>
+              <foreground color="-264983"/>
               <text value="Buko Pandan salad is a Filipino cold dessert from young coconut meat and Pandan-flavoured jelly that is very easy to make. Try this special Buko Pandan Salad recipe with added tapioca/sago pearls, kaong and nata de coco."/>
             </properties>
           </component>
@@ -47,10 +48,11 @@
           <component id="1cc9c" class="javax.swing.JList" binding="ingredientsList">
             <constraints/>
             <properties>
-              <background color="-5049675"/>
+              <background color="-13353161"/>
               <dropMode value="USE_SELECTION"/>
+              <enabled value="true"/>
               <font name="Constantia" size="12" style="0"/>
-              <foreground color="-15902463"/>
+              <foreground color="-264983"/>
               <model>
                 <item value="- 750 ml coconut juice"/>
                 <item value="- 2 pouch jelly powder (gulaman) - use green"/>
@@ -87,25 +89,26 @@
           <component id="c71ae" class="javax.swing.JList" binding="instructionsList">
             <constraints/>
             <properties>
-              <background color="-5049675"/>
+              <background color="-13353161"/>
+              <enabled value="true"/>
               <font name="Constantia" size="12" style="0"/>
-              <foreground color="-15902463"/>
+              <foreground color="-264983"/>
               <layoutOrientation value="0"/>
               <model>
                 <item value="1) In a pot, add coconut juice and dissolve the jelly powder or gulaman. Add the sugar and"/>
-                <item value=" pandan leaves and bring it to boil while stirring constantly."/>
+                <item value="pandan leaves and bring it to boil while stirring constantly."/>
                 <item value="2) Once it boils, remove from heat and pour into a square pan and let cool to set. You may"/>
-                <item value=" place it in the fridge to fasten the process. Once ready, cut the gelatin into cubes."/>
+                <item value="place it in the fridge to fasten the process. Once ready, cut the gelatin into cubes."/>
                 <item value="3) While waiting, cook the tapioca pearls. In a pot, bring 1 liter of water to boil. Add"/>
-                <item value=" the small sago or tapioca pearls and cook for 15 minutes or until translucent."/>
-                <item value=" (Check package instructions.) Stir occasionally to prevent from sticking together."/>
+                <item value="the small sago or tapioca pearls and cook for 15 minutes or until translucent."/>
+                <item value="(Check package instructions.) Stir occasionally to prevent from sticking together."/>
                 <item value="4) Turn off heat and strain the sago pearls using a fine sieve. Rinse thoroughly until the"/>
-                <item value=" sago or tapioca pearls are no longer hot to touch. Set aside."/>
-                <item value="5) In a big bowl, add the cream and sweetened condensed milk and stir until well blended. "/>
+                <item value="sago or tapioca pearls are no longer hot to touch. Set aside."/>
+                <item value="5) In a big bowl, add the cream and sweetened condensed milk and stir until well blended."/>
                 <item value="Add the coconut strips, tapioca pearls, pandan jelly cubes, kaong and nata de coco and"/>
-                <item value=" gently mix untilwell combined. (see Note 3)"/>
+                <item value="gently mix untilwell combined. (see Note 3)"/>
                 <item value="6) Cover bowl and leave it in the fridge to chill or transfer to another container if"/>
-                <item value=" planning to freeze."/>
+                <item value="planning to freeze."/>
               </model>
               <selectionMode value="2"/>
             </properties>
@@ -126,15 +129,15 @@
           <component id="d1080" class="javax.swing.JList" binding="notesList">
             <constraints/>
             <properties>
-              <background color="-5049675"/>
+              <background color="-13353161"/>
               <font name="Constantia" size="12" style="0"/>
-              <foreground color="-15902463"/>
+              <foreground color="-264983"/>
               <model>
                 <item value="Note 1. 2 pouches of gelatin powder (Knox) may also be used."/>
                 <item value="Note 2. If using Pandan essence/extract, use about 6-8 drops."/>
                 <item value="Note 3. If you have time, whip the cream separately into stiff peaks and gently fold it into"/>
-                <item value=" the mixture after all ingredients are added. If will give it more volume and is better for"/>
-                <item value=" freezing."/>
+                <item value="the mixture after all ingredients are added. If will give it more volume and is better for"/>
+                <item value="freezing."/>
               </model>
             </properties>
           </component>
@@ -146,7 +149,7 @@
         </constraints>
         <properties>
           <font name="Constantia" size="14" style="1"/>
-          <foreground color="-5046260"/>
+          <foreground color="-8055011"/>
           <text value="Ingredients"/>
         </properties>
       </component>
@@ -156,7 +159,7 @@
         </constraints>
         <properties>
           <font name="Constantia" size="14" style="1"/>
-          <foreground color="-5046260"/>
+          <foreground color="-8055011"/>
           <text value="Procedure"/>
         </properties>
       </component>
@@ -166,7 +169,7 @@
         </constraints>
         <properties>
           <font name="Constantia" size="14" style="1"/>
-          <foreground color="-5046260"/>
+          <foreground color="-8055011"/>
           <text value="Notes"/>
         </properties>
       </component>
@@ -175,6 +178,8 @@
           <grid row="8" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-9081250"/>
+          <foreground color="-264983"/>
           <text value="Back to Recipe Page"/>
         </properties>
       </component>
@@ -186,7 +191,7 @@
         </constraints>
         <properties>
           <font name="Script MT Bold" size="48" style="0"/>
-          <foreground color="-5046260"/>
+          <foreground color="-8055011"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
           <text value="Buko Pandan Recipe"/>
@@ -202,7 +207,7 @@
           <background color="-256"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <icon value="buko-pandan-salad.jpg"/>
+          <icon value="bukopandan.jpg"/>
           <text value=""/>
         </properties>
       </component>

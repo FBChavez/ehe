@@ -46,6 +46,9 @@ public class DecorateFrame extends JFrame{
     int moves = 0;
     int posR;
     int posC;
+    JLabel movesLabel = new JLabel("Moves Left: 10");
+    JButton restartButton = new JButton("Restart");
+    JButton backButton = new JButton("Back to Menu Page");
 
     DecorateFrame(String name){
 //        frame.setVisible(true);
@@ -54,7 +57,6 @@ public class DecorateFrame extends JFrame{
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-
 
 //        textLabel.setFont(new Font("Arial", Font.BOLD, 25));
 //        textLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -146,6 +148,25 @@ public class DecorateFrame extends JFrame{
         if (!surprise.contains(btn)){
             surprise.add(btn);
         }
+        // Add buttons and moves label
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(movesLabel);
+        buttonPanel.add(restartButton);
+        buttonPanel.add(backButton);
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        // Action listener for the restart button
+        restartButton.addActionListener(e -> restartGame());
+
+        // Action listener for the back button (change this to go back to name page logic)
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                MenuFrame menuFrame = new MenuFrame(name);
+                menuFrame.setVisible(true);
+            }
+        });
 
     }
 
@@ -160,6 +181,8 @@ public class DecorateFrame extends JFrame{
     //mu restart ang game if mahutdan shag moves
     private void restartGame() {
         moves = 0;
+
+        updateMovesLabel();
         surprise.clear();
         for (int r = 0; r < numRows; r++) {
             for (int c = 0; c < numCols; c++) {
@@ -176,11 +199,22 @@ public class DecorateFrame extends JFrame{
             surprise.add(btn);
         }
     }
+    private void updateMovesLabel() {
+        int movesLeft = 10 - moves;
+        movesLabel.setText("Moves Left: " + movesLeft);
+    }
 
     //transition to another tree (basta mu appear sha mu change) after makita niya ang snowflake or unsa
     private void setImage(BufferedImage image) {
         ImageIcon icon = new ImageIcon(image);
         imageLabel.setIcon(icon);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            DecorateFrame decorateFrame = new DecorateFrame("Player");
+            decorateFrame.setVisible(true);
+        });
     }
 }
 
