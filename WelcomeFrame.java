@@ -2,8 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class WelcomeFrame extends JFrame {
+    private Set<String> namesSet;
 
     public WelcomeFrame() {
         setTitle("Merry Christmas Greeting");
@@ -36,15 +40,28 @@ public class WelcomeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Enter your name:");
-                if (name != null && !name.isEmpty()) {
-                    dispose(); // Close the current frame
-                    MenuFrame christmasFrame = new MenuFrame(name);
-                    christmasFrame.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please enter your name.");
+                //check if name is not a number
+                try {
+                    if (name != null && name.matches("-?\\d+(\\.\\d+)?")) throw new IllegalArgumentException("Your name is not a number, dumbass!");
+                    if (name != null && !name.isEmpty()) {
+                        dispose(); // Close the current frame
+                        MenuFrame christmasFrame = new MenuFrame(name);
+                        christmasFrame.setVisible(true);
+                        if (!namesSet.contains(name)) appendNewUsers(name);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please enter your name.");
+                    }
+                } catch (IllegalArgumentException ex){
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }
         });
+
+        //set nameSet
+        namesSet = new HashSet<>();
+
+        //get users from file
+        getUsers();
 
         // Create a JPanel with a transparent background
         JPanel panel = new JPanel(new GridBagLayout());
@@ -64,5 +81,27 @@ public class WelcomeFrame extends JFrame {
         // Set the content pane to the JPanel
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
+    }
+
+    //private ang pag store sa names or pag search if user is already a user (ha)?
+    //useful for secret santa ni hihi
+    private void appendNewUsers(String name){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("names.txt", true))) {
+            writer.write(name);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getUsers(){
+        try (BufferedReader reader = new BufferedReader(new FileReader("names.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                namesSet.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
