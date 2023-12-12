@@ -32,6 +32,7 @@ public class SongsFrame extends JFrame {
         // Create Play and Pause buttons
         JButton playButton = new JButton("Play");
         JButton pauseButton = new JButton("Pause");
+        JButton backButton = new JButton("Back");
         pauseButton.setEnabled(false); // Initially, pause button is disabled
 
         // Add ActionListener to Play button
@@ -60,7 +61,14 @@ public class SongsFrame extends JFrame {
             playButton.setEnabled(true);
             pauseButton.setEnabled(false);
         });
-
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                MenuFrame menuFrame = new MenuFrame(name);
+                menuFrame.setVisible(true);
+            }
+        });
         // Set layout and add components
         setLayout(new BorderLayout());
         add(new JScrollPane(songsList), BorderLayout.CENTER);
@@ -68,7 +76,9 @@ public class SongsFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(playButton);
         buttonPanel.add(pauseButton);
+        buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
+
     }
 
     private void playSelectedSong() {
