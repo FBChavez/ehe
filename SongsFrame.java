@@ -1,96 +1,169 @@
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class SongsFrame extends JFrame {
 
     private JList<String> songsList;
     private DefaultListModel<String> listModel;
     private Clip clip;
+    private long clipTimePosition = 0;
+    private JProgressBar progressBar;
+    private boolean isDragging = false;
 
     public SongsFrame(String name) {
-        setTitle("Christmas Songs");
+        setTitle("Music Player");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(400, 400);
         setLocationRelativeTo(null);
 
-        // Sample list of Christmas songs
-        String[] songs = {"Jingle Bells", "Silent Night", "Deck the Halls", "Joy to the World"};
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel progressPanel = new JPanel(new BorderLayout());
 
-        // Create a DefaultListModel for the JList
+        // Sample list of songs
+        String[] songs = {"All I Want For Christmas", "Jingle Bell Rock", "Silent Night", "Deck the Halls", "Joy to the World"};
+
         listModel = new DefaultListModel<>();
         for (String song : songs) {
             listModel.addElement(song);
         }
 
-        // Create JList with the DefaultListModel
         songsList = new JList<>(listModel);
         songsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Create Play and Pause buttons
         JButton playButton = new JButton("Play");
         JButton pauseButton = new JButton("Pause");
         JButton backButton = new JButton("Back");
-        pauseButton.setEnabled(false); // Initially, pause button is disabled
+        JButton shuffleButton = new JButton("Shuffle");
 
-        // Add ActionListener to Play button
-        playButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playSelectedSong();
-                playButton.setEnabled(false);
-                pauseButton.setEnabled(true);
-            }
+        playButton.setPreferredSize(new Dimension(80, 30));
+        pauseButton.setPreferredSize(new Dimension(80, 30));
+        backButton.setPreferredSize(new Dimension(80, 30));
+        shuffleButton.setPreferredSize(new Dimension(80, 30));
+
+        pauseButton.setEnabled(false);
+
+        playButton.addActionListener(e -> {
+            playSelectedSong();
+            playButton.setEnabled(false);
+            pauseButton.setEnabled(true);
         });
 
-        // Add ActionListener to Pause button
-        pauseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pauseSelectedSong();
-                playButton.setEnabled(true);
-                pauseButton.setEnabled(false);
-            }
-        });
-
-        // Add ListSelectionListener to handle song selection
-        songsList.addListSelectionListener(e -> {
-            pauseSelectedSong(); // Pause the current song when a new song is selected
+        pauseButton.addActionListener(e -> {
+            pauseSelectedSong();
             playButton.setEnabled(true);
             pauseButton.setEnabled(false);
         });
-        backButton.addActionListener(new ActionListener() {
+
+        songsList.addListSelectionListener(e -> {
+            pauseSelectedSong();
+            playButton.setEnabled(true);
+            pauseButton.setEnabled(false);
+            progressBar.setValue(0); // Reset progress bar when a new song is selected
+        });
+
+        backButton.addActionListener(e -> {
+            stopSong();
+            dispose();
+            MenuFrame menuFrame = new MenuFrame(name);
+            menuFrame.setVisible(true);
+        });
+
+        shuffleButton.addActionListener(e -> {
+            stopSong();
+            progressBar.setValue(0); // Reset progress bar for shuffle
+            playRandomSong();
+        });
+
+        progressBar = new JProgressBar(0, 100);
+        progressBar.setStringPainted(true);
+
+        progressBar.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                MenuFrame menuFrame = new MenuFrame(name);
-                menuFrame.setVisible(true);
+            public void mousePressed(MouseEvent e) {
+                int mouseX = e.getX();
+                double width = progressBar.getWidth();
+                double newPercentage = (mouseX / width) * 100;
+                progressBar.setValue((int) newPercentage);
+                clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                clip.setMicrosecondPosition(clipTimePosition);
+                isDragging = true;
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (isDragging) {
+                    int mouseX = e.getX();
+                    double width = progressBar.getWidth();
+                    double newPercentage = (mouseX / width) * 100;
+                    progressBar.setValue((int) newPercentage);
+                    clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                    clip.setMicrosecondPosition(clipTimePosition);
+                    isDragging = false;
+                }
             }
         });
-        // Set layout and add components
-        setLayout(new BorderLayout());
-        add(new JScrollPane(songsList), BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(playButton);
-        buttonPanel.add(pauseButton);
-        buttonPanel.add(backButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+        progressBar.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (isDragging) {
+                    int mouseX = e.getX();
+                    double width = progressBar.getWidth();
+                    double newPercentage = (mouseX / width) * 100;
+                    progressBar.setValue((int) newPercentage);
+                    clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                    clip.setMicrosecondPosition(clipTimePosition);
+                }
+            }
+        });
 
+        controlPanel.add(backButton);
+        controlPanel.add(playButton);
+        controlPanel.add(pauseButton);
+        controlPanel.add(shuffleButton);
+
+        progressPanel.add(progressBar, BorderLayout.CENTER);
+
+        contentPanel.add(new JScrollPane(songsList), BorderLayout.CENTER);
+        contentPanel.add(progressPanel, BorderLayout.SOUTH);
+        contentPanel.add(controlPanel, BorderLayout.NORTH);
+
+        getContentPane().add(contentPanel);
     }
 
     private void playSelectedSong() {
         String selectedSong = songsList.getSelectedValue();
         if (selectedSong != null) {
             try {
-                // Replace "path/to/songs/" with the actual path to your songs
-                String songPath = "path/to/songs/" + selectedSong + ".wav";
+                String songPath = "songs/" + selectedSong + ".wav";
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResource(songPath));
                 clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
+
+                if (clipTimePosition > 0) {
+                    clip.setMicrosecondPosition(clipTimePosition);
+                }
+
                 clip.start();
+
+                Thread updateProgressBarThread = new Thread(() -> {
+                    while (clip.isRunning()) {
+                        try {
+                            progressBar.setValue((int) ((clip.getMicrosecondPosition() * 100) / clip.getMicrosecondLength()));
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                updateProgressBarThread.start();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -99,7 +172,29 @@ public class SongsFrame extends JFrame {
 
     private void pauseSelectedSong() {
         if (clip != null && clip.isRunning()) {
+            clipTimePosition = clip.getMicrosecondPosition();
             clip.stop();
         }
+    }
+
+    private void stopSong() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+        }
+    }
+
+    private void playRandomSong() {
+        List<String> songList = Collections.list(listModel.elements());
+        Collections.shuffle(songList);
+        String randomSong = songList.get(new Random().nextInt(songList.size()));
+        songsList.setSelectedValue(randomSong, true);
+        playSelectedSong();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            SongsFrame frame = new SongsFrame("Songs");
+            frame.setVisible(true);
+        });
     }
 }
