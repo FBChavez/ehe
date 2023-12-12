@@ -83,7 +83,7 @@ public class DecorateFrame extends JFrame{
         setImage(images[currentImageIndex]); //para saa images
 
         boardPanel.setLayout(new GridLayout(numRows, numCols));
-        boardPanel.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100)); //murag ni sha margin sa boardPanel
+        boardPanel.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200)); //murag ni sha margin sa boardPanel
         add(boardPanel);
 
         for (int r = 0; r < numRows; r++) {
@@ -108,8 +108,9 @@ public class DecorateFrame extends JFrame{
                                 if (surprise.contains(btn)) {
                                     currentImageIndex = (currentImageIndex + 1) % images.length;
                                     setImage(images[currentImageIndex]);
-                                    btn.setText("❄️");
+                                    btn.setText("  ❄️");
                                     JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
+                                    if (currentImageIndex != images.length-1) restartGame(); //mag restart ang game until sa last image then ambot unsay mahitabo after ana
                                     gameOver = true;
                                 } else {
                                     hint(btn.r, btn.c, btn);
