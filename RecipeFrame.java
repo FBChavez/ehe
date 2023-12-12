@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class RecipesFrame extends JFrame {
+public class RecipeFrame extends JFrame {
 
     private String playerName;
     private JPanel jPanel;
@@ -12,14 +12,16 @@ public class RecipesFrame extends JFrame {
     private JScrollPane instructionsSP;
     private JScrollPane notesSP;
     private JList notesList;
+    private JButton backToRecipePageButton;
     private JLabel recipenameLabel;
+    private JLabel foodImg;
 
-    public RecipesFrame(String name) {
+    public RecipeFrame(String name) {
         this.playerName = name;
 
         setTitle("Christmas Recipes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 600);
+        setSize(600, 675);
         setResizable(false);
         setLocationRelativeTo(null);
         setContentPane(jPanel);
