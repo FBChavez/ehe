@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-//Scene 2
+//Scene 2 check daw
 
 public class GameFrame extends JFrame{
 
