@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-//Meaw
+//Scene 2
 
 public class GameFrame extends JFrame{
 
