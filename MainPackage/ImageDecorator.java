@@ -1,3 +1,5 @@
+package MainPackage;
+
 // Decorator for wrapping an image
 public class ImageDecorator implements decorateRoom.Image {
     private decorateRoom.Image imageToDecorate;

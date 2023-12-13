@@ -1,3 +1,4 @@
+package MainPackage;
 
 public class decorateRoom {
     public static void main(String[] args) {

@@ -1,3 +1,5 @@
+package MainPackage;
+
 import static javax.swing.SwingUtilities.*;
 
 public class Main {

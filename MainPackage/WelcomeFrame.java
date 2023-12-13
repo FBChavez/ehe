@@ -1,3 +1,7 @@
+package MainPackage;
+
+import MainPackage.MenuFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +46,8 @@ public class WelcomeFrame extends JFrame {
                 String name = JOptionPane.showInputDialog("Enter your name:");
                 //check if name is not a number
                 try {
-                    if (name != null && name.matches("-?\\d+(\\.\\d+)?")) throw new IllegalArgumentException("Your name is not a number, dumbass!");
+                    if (name != null && name.matches("-?\\d+(\\.\\d+)?"))
+                        throw new IllegalArgumentException("Your name is not a number!");
                     if (name != null && !name.isEmpty()) {
                         dispose(); // Close the current frame
                         MenuFrame christmasFrame = new MenuFrame(name);

@@ -1,8 +1,11 @@
+package AllRecipes;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import MainPackage.RecipeFrame;
 
-public class RecipeFrame extends JFrame {
+public class BukoPandanFrame extends JFrame {
 
     private String playerName;
     private JPanel jPanel;
@@ -18,7 +21,7 @@ public class RecipeFrame extends JFrame {
     private JLabel recipenameLabel;
     private JLabel foodImg;
 
-    public RecipeFrame(String name) {
+    public BukoPandanFrame(String name) {
         this.playerName = name;
 
 
@@ -32,8 +35,8 @@ public class RecipeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                MenuFrame menuFrame = new MenuFrame(name);
-                menuFrame.setVisible(true);
+                RecipeFrame recipeFrame = new RecipeFrame(name);
+                recipeFrame.setVisible(true);
             }
         });
     }

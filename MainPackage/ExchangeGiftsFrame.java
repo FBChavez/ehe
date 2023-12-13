@@ -1,3 +1,5 @@
+package MainPackage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import MainPackage.MenuFrame;
 
 public class ExchangeGiftsFrame extends JFrame {
     private ArrayList<String> lists;

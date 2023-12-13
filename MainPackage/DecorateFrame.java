@@ -1,3 +1,5 @@
+package MainPackage;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+// Concrete Interface
 interface ButtonDecorate {
     void hiddenSnowflake();
 }
@@ -36,6 +40,7 @@ public class DecorateFrame extends JFrame{
             this.r = r;
             this.c = c;
         }
+
         public void setDecorate(ButtonDecorate decorate){
             this.decorate = decorate;
         }
@@ -46,10 +51,11 @@ public class DecorateFrame extends JFrame{
             }
         }
     }
+
     private int currentImageIndex;
     int numRows = 6;
     int numCols = numRows;
-    private int moves = 0;
+    private int moves = 10;
     private int posR;
     private int posC;
     boolean gameOver = false;
@@ -112,7 +118,7 @@ public class DecorateFrame extends JFrame{
                 btn.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30)); //para ni sa mga question mark (hint)
                 //pwede ra tangtangon si font if mag sa pag hatag hints/sa snowflake
 
-                clicking (btn);
+                clicking(btn);
 
                 boardPanel.add(btn);
             }
@@ -169,7 +175,7 @@ public class DecorateFrame extends JFrame{
                                 JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
                                 restartGame(); //mag restart ang game until sa last image then ambot unsay mahitabo after ana
                             } else { //balik sa menu if fully decorerated na ang tree
-                                JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the christmas tree!");
+                                JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the Christmas Tree!");
                                 MenuFrame menu = new MenuFrame(name);
                                 setVisible(false);
                                 menu.setVisible(true);
@@ -181,8 +187,7 @@ public class DecorateFrame extends JFrame{
                     }
                 }
                 if (!gameOver) {
-                    moves++;
-                    if (moves > 10) { //after 10 moves kay balik
+                    if (moves < 1) { //after 10 moves kay balik
                         JOptionPane.showMessageDialog(null, "You've reached the maximum number of moves. Restarting the game.");
                         restartGame();
                     }
@@ -213,11 +218,12 @@ public class DecorateFrame extends JFrame{
 
     //mu restart ang game if mahutdan shag moves
     private void restartGame() {
-
         surprise.clear();
-        moves = 0;
+
+        moves = 10; // Reset the moves to the initial value
         updateMovesLabel();
-        //I reset ang tree balik uwu
+
+        // Reset the tree and set a new surprise snowflake
         for (int r = 0; r < numRows; r++) {
             for (int c = 0; c < numCols; c++) {
                 Buttons btn = board[r][c];
@@ -226,13 +232,12 @@ public class DecorateFrame extends JFrame{
                 clicking(btn);
             }
         }
-
         setSnowflake();
     }
 
     private void updateMovesLabel() {
-        int movesLeft = 10 - moves;
-        movesLabel.setText("Moves Left: " + movesLeft);
+        moves = moves - 1;
+        movesLabel.setText("Moves Left: " + moves);
     }
 
     //transition to another tree (basta mu appear sha mu change) after makita niya ang snowflake or unsa
