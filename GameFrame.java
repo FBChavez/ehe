@@ -30,7 +30,7 @@ public class GameFrame extends JFrame{
     // Note: Add functionality to the backButton to return to the menuFrame
     JButton startButton, backButton, choice1, choice2, choice3, choice4;
     JTextArea mainTextArea;
-    int playerHP, mentalHP, silverRing, scene1EnemiesHP, frostyHP;
+    int playerHP, mentalHP, scene1EnemiesHP, frostyHP, scene4EnemiesHP, grinchHP, potions;
     String weapon, position;
 
     TitleScreenHandler tsHandler = new TitleScreenHandler();
@@ -109,6 +109,7 @@ public class GameFrame extends JFrame{
         choiceButtonPanel.setBackground(Color.black);
         choiceButtonPanel.setLayout(new GridLayout(4,1));
         con.add(choiceButtonPanel);
+
         choice1 = new JButton("Choice 1");
         choice1.setBackground(Color.black);
         choice1.setForeground(Color.white);
@@ -117,6 +118,7 @@ public class GameFrame extends JFrame{
         choice1.addActionListener(choiceHandler);
         choice1.setActionCommand("c1");
         choiceButtonPanel.add(choice1);
+
         choice2 = new JButton("Choice 2");
         choice2.setBackground(Color.black);
         choice2.setForeground(Color.white);
@@ -125,6 +127,7 @@ public class GameFrame extends JFrame{
         choice2.addActionListener(choiceHandler);
         choice2.setActionCommand("c2");
         choiceButtonPanel.add(choice2);
+
         choice3 = new JButton("Choice 3");
         choice3.setBackground(Color.black);
         choice3.setForeground(Color.white);
@@ -133,6 +136,7 @@ public class GameFrame extends JFrame{
         choice3.addActionListener(choiceHandler);
         choice3.setActionCommand("c3");
         choiceButtonPanel.add(choice3);
+
         choice4 = new JButton("Choice 4");
         choice4.setBackground(Color.black);
         choice4.setForeground(Color.white);
@@ -193,10 +197,13 @@ public class GameFrame extends JFrame{
 
     public void playerSetup(){
 
-        playerHP = 10;
+        playerHP = 12;
         mentalHP = 3;
         scene1EnemiesHP = 6;
-        frostyHP = 20;
+        frostyHP = 18;
+        scene4EnemiesHP = 6;
+        grinchHP = 24;
+        potions = 5;
         weapon = "None";
         weaponLabelName.setText(weapon);
         hpLabelNumber.setText("" + playerHP);
@@ -298,21 +305,6 @@ public class GameFrame extends JFrame{
         choice2.setVisible(false);
         choice3.setVisible(false);
         choice4.setVisible(false);
-    }
-
-    // Win
-    public void win(){
-        position = "win";
-
-        mainTextArea.setText("");
-
-        silverRing = 1;
-
-        choice1.setText("Go east");
-        choice2.setText("");
-        choice3.setText("");
-        choice4.setText("");
-
     }
 
     // Lose
@@ -418,7 +410,7 @@ public class GameFrame extends JFrame{
 
     public void mentalWarning() {
         position = "mentalWarning";
-        mainTextArea.setText("Narrator: If you won't respond properly, your health will eventually lower.");
+        mainTextArea.setText("Narrator: If you won't respond properly, your health will eventually decrease.");
 
         choice1.setText("I'll talk, spare me."); //
         choice2.setText("..."); //
@@ -439,8 +431,10 @@ public class GameFrame extends JFrame{
     // Scene 1 Start
     public void scene1() {
         position = "scene1";
-        mainTextArea.setText("As you enter Santa's Workshop, you spot three of Grinch's subordinates surrounded by presents." +
-                "\n\nWhat will you do?");
+        mainTextArea.setText("""
+                As you enter Santa's Workshop, you spot three of Grinch's subordinates surrounded by presents.
+
+                What will you do?""");
 
         choice1.setText("(Stealth Approach)"); //
         choice2.setText("(Confront Head-On)"); //
@@ -470,9 +464,19 @@ public class GameFrame extends JFrame{
             playerDamage = new java.util.Random().nextInt(4);
         }
 
-        mainTextArea.setText("You attacked the Grinch subordinates head-on and gave " + playerDamage + " damage!");
-
         scene1EnemiesHP = scene1EnemiesHP - playerDamage;
+
+        if(scene1EnemiesHP < 1) {
+            scene1EnemiesHP = 0;
+        }
+
+        if(playerDamage == 0) {
+            mainTextArea.setText("You miss your attack!" +
+                    "\n\nGrinch's Minions HP: " + scene1EnemiesHP);
+        } else {
+            mainTextArea.setText("You attacked the Grinch subordinates head-on and gave " + playerDamage + " damage!" +
+                    "\n\nGrinch's Minions HP: " + scene1EnemiesHP);
+        }
 
         choice1.setText(">"); //
         choice2.setText("");
@@ -480,14 +484,20 @@ public class GameFrame extends JFrame{
         choice4.setText("");
     }
 
-    public void grinchAttackScene1(){
-        position = "grinchAttackScene1";
+    public void subordinatesAttackScene1(){
+        position = "subordinatesAttackScene1";
 
         int subordinatesDamage = 0;
 
         subordinatesDamage = new java.util.Random().nextInt(2);
 
-        mainTextArea.setText("The subordinate/s attacked you and dealt " + subordinatesDamage + " damage!");
+        if(subordinatesDamage == 0) {
+            mainTextArea.setText("You successfully dodge them!" +
+                    "\n\nGrinch's Minions HP: " + scene1EnemiesHP);
+        } else {
+            mainTextArea.setText("The subordinate/s attacked you and dealt " + subordinatesDamage + " damage!" +
+                    "\n\nGrinch's Minions HP: " + scene1EnemiesHP);
+        }
 
         playerHP = playerHP - subordinatesDamage;
         if (playerHP < 1) {
@@ -515,7 +525,7 @@ public class GameFrame extends JFrame{
     public void candyDistraction() {
         position = "candyDistraction";
         mainTextArea.setText("Distracting them by throwing candy canes on the window to make noise gives you the upper hand." +
-                "Presents are retrieved." +
+                " Presents are retrieved." +
                 "\n\nYou escape with a scratch and lose 1 health points.");
 
         choice1.setText("It somehow worked."); //
@@ -527,7 +537,8 @@ public class GameFrame extends JFrame{
     // Scene 1 Choice 4
     public void negotiate() {
         position = "negotiate";
-        mainTextArea.setText("Negotiation fails, and the Grinches attacks you. Prepare for a fight.");
+        mainTextArea.setText("Negotiation fails, and the three subordinates attack you. " +
+                "\n\nPrepare for a fight.");
 
         choice1.setText(">"); //
         choice2.setText("");
@@ -626,7 +637,7 @@ public class GameFrame extends JFrame{
     // Scene 2 End
     public void scene2End() {
         position = "scene2End";
-        mainTextArea.setText("Narrator: As you leave the Snowy Forest, the Grinch's henchmen has retreated" +
+        mainTextArea.setText("Narrator: As you leave the Snowy Forest, the Grinch's henchmen has retreated " +
                 "into the treacherous Ice Caverns, where slippery slopes and icy traps await." +
                 "\n\nWhat will you do?");
 
@@ -708,7 +719,8 @@ public class GameFrame extends JFrame{
     public void attackFrosty() {
         position = "attackFrosty";
         mainTextArea.setText("The Frost Giant is offended by your aggression. " +
-                "Now you have an angry Frost Giant to deal with.");
+                "Now you have an angry Frost Giant to deal with." +
+                "\n\nPrepare for a fight.");
 
         choice1.setText(">"); //
         choice2.setText("");
@@ -767,9 +779,19 @@ public class GameFrame extends JFrame{
             playerDamage = (new java.util.Random().nextInt(4)) + 3;
         }
 
-        mainTextArea.setText("You attacked the Frost Giant and dealt " + playerDamage + " damage!");
-
         frostyHP = frostyHP - playerDamage;
+
+        if(frostyHP < 1) {
+            frostyHP = 0;
+        }
+
+        if(playerDamage < 1) {
+            mainTextArea.setText("You miss your attack!" +
+                    "\n\nFrost Giant HP: " + frostyHP);
+        } else {
+            mainTextArea.setText("You attacked the Frost Giant and dealt " + playerDamage + " damage!" +
+                    "\n\nFrost Giant HP: " + frostyHP);
+        }
 
         choice1.setText(">");
         choice2.setText("");
@@ -784,9 +806,11 @@ public class GameFrame extends JFrame{
 
         frostyDamage = (new java.util.Random().nextInt(4)) + 2;
 
-        mainTextArea.setText("The Frost Giant unleashed a hail storm and dealt " + frostyDamage + " damage!");
-
         playerHP = playerHP - frostyDamage;
+
+        mainTextArea.setText("The Frost Giant unleashed a hailstorm and dealt " + frostyDamage + " damage!" +
+                "\n\nFrost Giant HP: " + frostyHP);
+
         if (playerHP < 1) {
             playerHP = 0;
         }
@@ -817,9 +841,9 @@ public class GameFrame extends JFrame{
     public void scene3End() {
         position = "scene3End";
         mainTextArea.setText("Narrator: After reaching the end of the Ice Caverns, " +
-                "you follow the path leading to the Grinch's lair where he's guarding the stolen presents.");
+                "you follow the path leading to the Grinch's Lair where he's guarding the stolen presents.");
 
-        choice1.setText(">");
+        choice1.setText(">"); //
         choice2.setText("");
         choice3.setText("");
         choice4.setText("");
@@ -828,12 +852,314 @@ public class GameFrame extends JFrame{
     // Scene 4 Start
     public void scene4() {
         position = "scene4";
-        mainTextArea.setText("\n\nWhat will you do?");
+        mainTextArea.setText("Narrator: You finally reach the Grinch's Lair. " +
+                "I'll give you 5 Health Potions." +
+                "\n\nNow, what will you do?");
 
-        choice1.setText("()"); //
-        choice2.setText("()"); //
-        choice3.setText("()"); //
-        choice4.setText("()"); //
+        choice1.setText("(Sneak In)"); //
+        choice2.setText("(Direct Confrontation)"); //
+        choice3.setText("(Distract and Grab)"); //
+        choice4.setText("(Negotiate Again)"); //
+    }
+
+    // Scene 4 Choice 1
+    public void sneakIn() {
+        position = "sneakIn";
+        mainTextArea.setText("You stealthily try to retrieve the presents, but the Grinch notices." +
+                "\n\nPrepare for combat against the Grinch with his 4 henchmen.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 4 Choice 2
+    public void confront(){
+        position = "confront";
+
+        mainTextArea.setText("You challenge the Grinch to a duel for the presents, and he accepts." +
+                "\n\nPrepare for a duel against Grinch.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 4 Choice 3
+    public void distractAndGrab(){
+        position = "distractAndGrab";
+
+        mainTextArea.setText("You quickly scan the room for potential items to create a distraction. " +
+                "Spotting a pile of jingly ornaments, " +
+                "you throw them to the opposite corner of the lair.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void distractionFailed(){
+        position = "distractionFailed";
+
+        mainTextArea.setText("Instead of creating a diversion, you call the attention of more henchmen." +
+                "\n\nPrepare for combat against the Grinch with his 7 henchmen.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 4 Choice 4
+    public void negotiateAgain(){
+        position = "negotiateAgain";
+
+        mainTextArea.setText("Oh no! The Grinch is not budging. " +
+                "Looks like you'll have to fight for those presents." +
+                "\n\nPrepare for combat against the Grinch with his 4 henchmen.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 4 Fight
+    public void grinchCombat(){
+        position = "grinchCombat";
+
+        mainTextArea.setText("What will you do?" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        choice1.setText("(Attack Grinch)"); //
+        choice2.setText("(Use Potion)"); //
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void grinchWithHenchmenCombat(){
+        position = "grinchWithHenchmenCombat";
+
+        mainTextArea.setText("What will you do?" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        choice1.setText("(Attack Grinch)"); //
+        choice2.setText("(Attack Henchmen)"); //
+        choice3.setText("(Use Potion)"); //
+        choice4.setText("");
+    }
+
+    public void henchmenCombat(){
+        position = "henchmenCombat";
+
+        mainTextArea.setText("What will you do?" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        choice1.setText("(Attack Henchmen)"); //
+        choice2.setText("(Use Potion)"); //
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void usePotion(){
+        position = "usePotion";
+
+        if(potions < 1) {
+            mainTextArea.setText("Narrator: It seems like you ran out of potions. " +
+                    "Here is some of my blood. " +
+                    "You gain 4 Health Points!" +
+                    "\n\nGrinch HP: " + grinchHP +
+                    "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+            playerHP = playerHP + 4;
+            hpLabelNumber.setText(""+playerHP);
+        } else {
+            potions = potions - 1;
+            int healing = 0;
+
+            healing = (new java.util.Random().nextInt(10)) + 5;
+
+            mainTextArea.setText("You gain " + healing + " Health Points!");
+            playerHP = playerHP + healing;
+            hpLabelNumber.setText(""+playerHP);
+        }
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void playerAttackGrinchScene4(){
+        position = "playerAttackGrinchScene4";
+
+        int playerDamage = 0;
+
+        if(weapon.equals("Knife")){
+            playerDamage = new java.util.Random().nextInt(4);
+        }
+
+        if(weapon.equals("Knife(+3)")){
+            playerDamage = (new java.util.Random().nextInt(4)) + 3;
+        }
+
+        if(weapon.equals("Sword")){
+            playerDamage = (new java.util.Random().nextInt(7)) + 4;
+        }
+
+        grinchHP = grinchHP - playerDamage;
+        if(grinchHP < 1) {
+            grinchHP = 0;
+        }
+
+        mainTextArea.setText("You attacked the Grinch and dealt " + playerDamage + " damage!" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void playerAttackHenchmenScene4(){
+        position = "playerAttackHenchmenScene4";
+
+        int playerDamage = 0;
+
+        if(weapon.equals("Knife")){
+            playerDamage = new java.util.Random().nextInt(4);
+        }
+
+        if(weapon.equals("Knife(+3)")){
+            playerDamage = (new java.util.Random().nextInt(4)) + 3;
+        }
+
+        if(weapon.equals("Sword")){
+            playerDamage = (new java.util.Random().nextInt(7)) + 4;
+        }
+
+        scene4EnemiesHP = scene4EnemiesHP - playerDamage;
+        if(scene4EnemiesHP < 1) {
+            scene4EnemiesHP = 0;
+        }
+
+        mainTextArea.setText("You attacked the Henchmen and dealt " + playerDamage + " damage!" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void grinchAttackScene4(){
+        position = "grinchAttackScene4";
+
+        int grinchDamage = 0;
+
+        grinchDamage = (new java.util.Random().nextInt(7)) + (new java.util.Random().nextInt(3));
+
+        mainTextArea.setText("The Grinch uses his arcane magic and dealt " + grinchDamage + " damage!" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        playerHP = playerHP - grinchDamage;
+        if (playerHP < 1) {
+            playerHP = 0;
+        }
+        hpLabelNumber.setText(""+playerHP);
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void henchmenAttackScene4(){
+        position = "henchmenAttackScene4";
+
+        int henchmenDamage = 0;
+
+        henchmenDamage = (new java.util.Random().nextInt(3)) + 3;
+
+        mainTextArea.setText("The henchmen attacked you and dealt " + henchmenDamage + " damage!" +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        playerHP = playerHP - henchmenDamage;
+        if (playerHP < 1) {
+            playerHP = 0;
+        }
+        hpLabelNumber.setText(""+playerHP);
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void grinchDeath(){
+        position = "grinchDeath";
+
+        mainTextArea.setText("You killed the Grinch." +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void henchmenDeath(){
+        position = "henchmenDeath";
+
+        mainTextArea.setText("You killed all the henchmen." +
+                "\n\nGrinch HP: " + grinchHP +
+                "\nGrinch's Henchmen HP: " + scene4EnemiesHP);
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 4 End
+    public void successfulFight4(){
+        position = "successfulFight4";
+
+        mainTextArea.setText("Narrator: Congratulations! " +
+                "You successfully retrieved the presents and saved Christmas!");
+
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void ending(){
+        position = "ending";
+
+        mainTextArea.setText("The joyous cheers of Santa and the elves fill the North Pole, " +
+                "and you're rewarded with extra holiday spirit and the title \"Heroes\' in the workshop.");
+
+        choice1.setText("Play Again.");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+
+        choice1.setVisible(true);
+        choice2.setVisible(false);
+        choice3.setVisible(false);
+        choice4.setVisible(false);
     }
 
     public class TitleScreenHandler implements ActionListener{
@@ -866,6 +1192,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c4":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             prelude2();
                             break;
                     }
@@ -883,6 +1212,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c4":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             prelude3();
                             break;
                     }
@@ -894,6 +1226,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c2":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             prelude4();
                             break;
                         case "c3":
@@ -901,6 +1236,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c4":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             prelude4();
                             break;
                     }
@@ -918,6 +1256,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c4":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             obtainPocketKnife();;
                             break;
                     }
@@ -935,6 +1276,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c4":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             guidance();;
                             break;
                     }
@@ -946,6 +1290,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c2":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             mentalWarning();
                             break;
                     }
@@ -963,6 +1310,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c4":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             mentalWarning();
                             break;
                     }
@@ -977,6 +1327,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c3":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             mentalWarning();
                             break;
 
@@ -989,7 +1342,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c2":
                             dealMentalDamage(3);
-                            mentalWarning();
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             break;
                     }
                     break;
@@ -1000,6 +1355,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c2":
                             dealMentalDamage(3);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             mentalWarning();
                             break;
                     }
@@ -1047,7 +1405,7 @@ public class GameFrame extends JFrame{
                 case "negotiate":
                     switch(yourChoice){
                         case "c1":
-                            grinchAttackScene1();
+                            subordinatesAttackScene1();
                             break;
                     }
                     break;
@@ -1056,14 +1414,14 @@ public class GameFrame extends JFrame{
                     switch(yourChoice){
                         case "c1":
                             if(scene1EnemiesHP > 0) {
-                                grinchAttackScene1();
+                                subordinatesAttackScene1();
                             } else {
                                 successfulFight1();
                             }
                             break;
                     }
                     break;
-                case "grinchAttackScene1":
+                case "subordinatesAttackScene1":
                     switch(yourChoice){
                         case "c1":
                             if(playerHP > 0) {
@@ -1084,6 +1442,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c2":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             stayStill1();
                             break;
                     }
@@ -1149,6 +1510,9 @@ public class GameFrame extends JFrame{
                             break;
                         case "c2":
                             dealMentalDamage(1);
+                            if(playerHP < 1) {
+                                emotionalDeath();
+                            }
                             stayStill2();
                             break;
                     }
@@ -1325,8 +1689,189 @@ public class GameFrame extends JFrame{
                     }
                     break;
             // Scene 4 Start
-
-
+                case "scene4":
+                    switch(yourChoice){
+                        case "c1":
+                            sneakIn();
+                            break;
+                        case "c2":
+                            confront();
+                            break;
+                        case "c3":
+                            distractAndGrab();
+                            break;
+                        case "c4":
+                            negotiateAgain();
+                            break;
+                    }
+                    break;
+                case "sneakIn", "negotiateAgain":
+                    switch(yourChoice){
+                        case "c1":
+                            grinchWithHenchmenCombat();
+                            break;
+                    }
+                    break;
+                case "confront":
+                    switch(yourChoice){
+                        case "c1":
+                            grinchHP = grinchHP + 12;
+                            scene4EnemiesHP = 0;
+                            grinchCombat();
+                            break;
+                    }
+                    break;
+                case "distractAndGrab":
+                    switch(yourChoice){
+                        case "c1":
+                            distractionFailed();
+                            break;
+                    }
+                    break;
+                case "distractionFailed":
+                    switch(yourChoice){
+                        case "c1":
+                            scene4EnemiesHP = scene4EnemiesHP + 4;
+                            grinchWithHenchmenCombat();
+                            break;
+                    }
+                    break;
+                case "grinchCombat":
+                    switch(yourChoice){
+                        case "c1":
+                            playerAttackGrinchScene4();
+                            break;
+                        case "c2":
+                            usePotion();
+                            break;
+                    }
+                    break;
+                case "grinchWithHenchmenCombat":
+                    switch(yourChoice){
+                        case "c1":
+                            playerAttackGrinchScene4();
+                            break;
+                        case "c2":
+                            playerAttackHenchmenScene4();
+                            break;
+                        case "c3":
+                            usePotion();
+                            break;
+                    }
+                    break;
+                case "henchmenCombat":
+                    switch(yourChoice){
+                        case "c1":
+                            playerAttackHenchmenScene4();
+                            break;
+                        case "c2":
+                            usePotion();
+                            break;
+                    }
+                    break;
+                case "usePotion":
+                    switch(yourChoice){
+                        case "c1":
+                            if(grinchHP > 0) {
+                                grinchAttackScene4();
+                            } else {
+                                henchmenAttackScene4();
+                            }
+                            break;
+                    }
+                    break;
+                case "playerAttackGrinchScene4":
+                    switch(yourChoice){
+                        case "c1":
+                            if(grinchHP < 1) {
+                                grinchDeath();
+                            } else {
+                                grinchAttackScene4();
+                            }
+                            break;
+                    }
+                    break;
+                case "playerAttackHenchmenScene4":
+                    switch(yourChoice){
+                        case "c1":
+                            if(scene4EnemiesHP < 1) {
+                                henchmenDeath();
+                            } else {
+                                if(grinchHP < 1) {
+                                    henchmenAttackScene4();
+                                } else {
+                                    grinchAttackScene4();
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                case "grinchAttackScene4":
+                    switch(yourChoice){
+                        case "c1":
+                            if(playerHP < 1) {
+                                lose();
+                            } else {
+                                if(scene4EnemiesHP > 0) {
+                                    henchmenAttackScene4();
+                                } else {
+                                    grinchCombat();
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                case "henchmenAttackScene4":
+                    switch(yourChoice){
+                        case "c1":
+                            if(playerHP < 1) {
+                                lose();
+                            } else {
+                                if(grinchHP < 1) {
+                                    henchmenCombat();
+                                } else {
+                                    grinchWithHenchmenCombat();
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                case "grinchDeath":
+                    switch(yourChoice){
+                        case "c1":
+                            if(scene4EnemiesHP > 0) {
+                                henchmenCombat();
+                            } else {
+                                successfulFight4();
+                            }
+                            break;
+                    }
+                    break;
+                case "henchmenDeath":
+                    switch(yourChoice){
+                        case "c1":
+                            if(grinchHP > 0) {
+                                grinchCombat();
+                            } else {
+                                successfulFight4();
+                            }
+                            break;
+                    }
+                    break;
+                case "successfulFight4":
+                    switch(yourChoice){
+                        case "c1":
+                            ending();
+                            break;
+                    }
+                    break;
+                case "ending":
+                    switch(yourChoice){
+                        case "c1":
+                            restart();
+                            break;
+                    }
+                    break;
             // Death events
                 case "deathWish", "emotionalDeath", "lose", "killedByNarrator", "giveUp":
                     switch(yourChoice){
