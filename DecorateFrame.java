@@ -63,8 +63,10 @@ public class DecorateFrame extends JFrame{
     JPanel boardPanel = new JPanel();
     private JLabel imageLabel = new JLabel();
     private BufferedImage[] images ;
+    private String name;
 
     DecorateFrame(String name){
+        this.name = name;
         setSize(1122, 650);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -110,49 +112,7 @@ public class DecorateFrame extends JFrame{
                 btn.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30)); //para ni sa mga question mark (hint)
                 //pwede ra tangtangon si font if mag sa pag hatag hints/sa snowflake
 
-                btn.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e) { //pwede ramn unta ni actionlistener pero nanguha rakog code somewhere hehe
-
-                        Buttons btn = (Buttons) e.getSource();
-                        //left click
-                        if (e.getButton() == MouseEvent.BUTTON1) {
-                            updateMovesLabel();
-                            if (btn.getText() == "") {
-                                btn.setEnabled(false);
-
-                                if (surprise.contains(btn)) {
-                                    currentImageIndex = (currentImageIndex + 1) % images.length;
-                                    setImage(images[currentImageIndex]);
-
-                                    ButtonDecorate snowflake = new HiddenSnowflake(btn);
-                                    btn.setDecorate(snowflake);
-                                    btn.hiddenSnowflake();
-
-                                    if (currentImageIndex != images.length-1) {
-                                        JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
-                                        restartGame(); //mag restart ang game until sa last image then ambot unsay mahitabo after ana
-                                    } else { //balik sa menu if fully decorerated na ang tree
-                                        JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the christmas tree!");
-                                        MenuFrame menu = new MenuFrame(name);
-                                        setVisible(false);
-                                        menu.setVisible(true);
-                                    }
-                                    gameOver = true;
-                                } else {
-                                    hint(btn.r, btn.c, btn);
-                                }
-                            }
-                        }
-                        if (!gameOver) {
-                            moves++;
-                            if (moves > 10) { //after 10 moves kay balik
-                                JOptionPane.showMessageDialog(null, "You've reached the maximum number of moves. Restarting the game.");
-                                restartGame();
-                            }
-                        }
-                    }
-                });
+                clicking (btn);
 
                 boardPanel.add(btn);
             }
@@ -184,6 +144,53 @@ public class DecorateFrame extends JFrame{
 
     }
 
+    void clicking(Buttons btn){
+        btn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { //pwede ramn unta ni actionlistener pero nanguha rakog code somewhere hehe
+
+                Buttons btn = (Buttons) e.getSource();
+                //left click
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    updateMovesLabel();
+
+                    if (btn.getText() == "") {
+                        btn.setEnabled(false);
+
+                        if (surprise.contains(btn)) {
+                            currentImageIndex = (currentImageIndex + 1) % images.length;
+                            setImage(images[currentImageIndex]);
+
+                            ButtonDecorate snowflake = new HiddenSnowflake(btn);
+                            btn.setDecorate(snowflake);
+                            btn.hiddenSnowflake();
+
+                            if (currentImageIndex != images.length-1) {
+                                JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
+                                restartGame(); //mag restart ang game until sa last image then ambot unsay mahitabo after ana
+                            } else { //balik sa menu if fully decorerated na ang tree
+                                JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the christmas tree!");
+                                MenuFrame menu = new MenuFrame(name);
+                                setVisible(false);
+                                menu.setVisible(true);
+                            }
+                            gameOver = true;
+                        } else {
+                            hint(btn.r, btn.c, btn);
+                        }
+                    }
+                }
+                if (!gameOver) {
+                    moves++;
+                    if (moves > 10) { //after 10 moves kay balik
+                        JOptionPane.showMessageDialog(null, "You've reached the maximum number of moves. Restarting the game.");
+                        restartGame();
+                    }
+                }
+            }
+        });
+    }
+
     void setSnowflake(){
         //mu set kng asa mu lugar si snowflake (randomly)
         surprise = new ArrayList<Buttons>();
@@ -210,12 +217,13 @@ public class DecorateFrame extends JFrame{
         surprise.clear();
         moves = 0;
         updateMovesLabel();
-
+        //I reset ang tree balik uwu
         for (int r = 0; r < numRows; r++) {
             for (int c = 0; c < numCols; c++) {
                 Buttons btn = board[r][c];
                 btn.setText("");
                 btn.setEnabled(true);
+                clicking(btn);
             }
         }
 

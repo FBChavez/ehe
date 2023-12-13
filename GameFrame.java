@@ -225,7 +225,6 @@ public class GameFrame extends JFrame{
             }
         }
 
-
         hpLabelNumber.setText(""+playerHP);
     }
 

@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,12 +6,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class ExchangeGiftsFrame extends JFrame {
     private ArrayList<String> lists;
+
     public ExchangeGiftsFrame(String name) {
         setTitle("Merry Christmas Greeting");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,6 +48,19 @@ public class ExchangeGiftsFrame extends JFrame {
 
         constraints.gridy = 1;
         panel.add(tofindManits, constraints);
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                MenuFrame menuFrame = new MenuFrame(name);
+                menuFrame.setVisible(true);
+            }
+        });
+
+        constraints.gridy = 2; // Set the grid Y position for the back button
+        panel.add(backButton, constraints); // Add the back button to the panel
 
         add(panel);
     }

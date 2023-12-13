@@ -106,8 +106,8 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                RPGFrame rpgFrame= new RPGFrame(name);
-                rpgFrame.setVisible(true);
+                GameFrame gameFrame= new GameFrame();
+                gameFrame.setVisible(true);
             }
         });
 
