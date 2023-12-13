@@ -29,7 +29,7 @@
               <editable value="false"/>
               <font name="Constantia" size="12" style="0"/>
               <foreground color="-264983"/>
-              <text value="Pasta Carbonara loaded with crisp bacon, sauteed mushrooms, and flavorful cream sauce is a tasty pasta dish the whole family is sure to love. It's so easy to make and perfect for busy weeknights."/>
+              <text value="Lumpiang Shanghai is the Filipino version of the Chinese fried spring rolls.  These are small logs of minced meat covered in spring roll wrappers and deep-fried to golden perfection.   A word of warning: these are beyond addictive, especially when dipped in sweet and sour sauce (or in a pinch, ketchup).   It’s not uncommon to see Filipino moms wrapping mountains of lumpia on the morning of Christmas Eve! "/>
             </properties>
           </component>
         </children>
@@ -54,19 +54,15 @@
               <font name="Constantia" size="12" style="0"/>
               <foreground color="-264983"/>
               <model>
-                <item value="- 1 pound uncooked spaghetti"/>
-                <item value="- 2 pounds bacon, chopped"/>
-                <item value="- 1 onion, peeled and chopped"/>
-                <item value="- 3 cloves garlic, peeled and minced"/>
-                <item value="- 1 pound fresh button mushrooms. sliced thinly"/>
-                <item value="- 2 tablespoons butter"/>
-                <item value="- 1 tablespoon flour"/>
-                <item value="- 1 cup chicken broth"/>
-                <item value="- 14 ounces all-purpose cream"/>
-                <item value="- 2 tablespoons Parmesan cheese and more for serving"/>
-                <item value="- 1 teaspoon freshly grated nutmeg"/>
-                <item value="- salt and pepper to taste"/>
-                <item value="- ¼ cup fresh parsley, stemmed and chopped"/>
+                <item value="- 1 package Lumpia wrappers (Chinese or Vietnamese spring roll wrappers meant for frying can be used (25 sheets))"/>
+                <item value="- 2 lbs. ground pork"/>
+                <item value="- 5 cloves garlic (peeled and minced)"/>
+                <item value="- 1 inch ginger, peeled and minced"/>
+                <item value="- 3 tablespoons soy sauce"/>
+                <item value="- 1/2 teaspoon chicken bouillon powder (optional)"/>
+                <item value="- 2 eggs (lightly beaten)"/>
+                <item value="- 1/2 teaspoon ground black pepper"/>
+                <item value="- 6 oz. cabbage, thinly sliced"/>
               </model>
             </properties>
           </component>
@@ -92,16 +88,30 @@
               <foreground color="-264983"/>
               <layoutOrientation value="0"/>
               <model>
-                <item value="1.) In a large pot over medium heat, bring about 4 quarts salted water to a boil. Add spaghetti and cook 1 minute shy of package directions. Remove from heat and drain well. Keep warm."/>
-                <item value="2.) In a wide pan over medium heat, add bacon. Cook, stirring occasionally, until it browns and crisps. With a slotted spoon, remove from heat and drain on paper towels."/>
-                <item value="3.) Discard the rendered fat except for about 1 tablespoon. Add onions and garlic and cook until softened. "/>
-                <item value="4.) Add mushrooms and cook until softened. With a slotted spoon, remove the mushroom mixture from the pan and keep warm."/>
-                <item value="5.) Add butter to pan and heat until melted. Add flour and cook, stirring regularly, for about 1 to 2 minutes or until smooth and lightly browned."/>
-                <item value="6.) Slowly add chicken broth, whisking regularly to prevent lumps. "/>
-                <item value="7.) Add cream. Lower heat and bring to a simmer. Continue to cook, whisking occasionally, until slightly thickened."/>
-                <item value="8.) Add Parmesan cheese and nutmeg. Season with salt and pepper to taste."/>
-                <item value="9.) Add pasta, bacon, and mushroom mixture. Toss to combine until pasta is coated with sauce and heated through. "/>
-                <item value="10.) To serve, garnish with fresh parsley and additional Parmesan cheese. Serve hot."/>
+                <item value="1.) Using a serrated knife, cut the square lumpia wrappers in half "/>
+                <item value="so that you have two stacks of rectangular wrappers. Place a damp "/>
+                <item value="paper towel over the wrappers to keep them from drying out as you work."/>
+                <item value="2.) Combine the pork, cabbage, garlic, ginger, soy sauce, chicken "/>
+                <item value="bouillon powder (if using), eggs, and ground black pepper in a large "/>
+                <item value="bowl. Using your hands, or a rubber spatula, mix the filling well so "/>
+                <item value="that the seasonings are evenly distributed."/>
+                <item value="3.) Place one of the rectangular wrappers vertically on your work "/>
+                <item value="surface with the short edge facing you. Place a heaping teaspoon of the "/>
+                <item value="filling on the wrapper about half an inch from the edge closest to you. "/>
+                <item value="Grasp the bottom edge of the wrapper and roll it up and over the filling, "/>
+                <item value="continuing to roll until 2 inches of wrapper remain."/>
+                <item value="4.) How to wrap lumpia with spring roll wrapper. "/>
+                <item value="5.) Dip two fingers into a bowl of water, then moisten the last 2 inches "/>
+                <item value="of wrapper with your fingers. Finish rolling the lumpia, then rest it on "/>
+                <item value="its seam. Continue rolling with the rest of the filling and lumpia wrappers."/>
+                <item value="6.) At this point, you can freeze your rolled lumpia if you wish by placing "/>
+                <item value="them in freezer bags and then into your freezer."/>
+                <item value="7.) To cook the lumpia, fill a large frying pan with about 1/2-inch of "/>
+                <item value="vegetable oil. Heat the oil over medium-high heat. Gently place the lumpia "/>
+                <item value="into the hot oil and fry until golden brown on all sides, 3 to 5 minutes total "/>
+                <item value="(if frying frozen lumpia, it will take 1 to 2 minutes longer)."/>
+                <item value="8.) Place the fried lumpia on paper towels and serve immediately with sweet "/>
+                <item value="and sour sauce or chili sauce (bottled from the store is fine)."/>
               </model>
               <selectionMode value="2"/>
             </properties>
@@ -126,9 +136,10 @@
               <font name="Constantia" size="12" style="0"/>
               <foreground color="-264983"/>
               <model>
-                <item value="Note 1. Cook the pasta for a few minutes less than the package directions, as it will continue to cook in the sauce."/>
-                <item value="Note 2. Pasta tends to absorb a lot of moisture, so go a little heavy on the cream sauce to compensate for the drying out. The sauce will also thicken as it sits, so make it a bit thinner than you'd like."/>
-                <item value="Note 3. Once you add the heavy cream, cook at a gentle simmer, and do not boil to prevent the sauce from curdling."/>
+                <item value="Note 1. You can also add finely minced raw shrimp to the pork mixture if you'd like. "/>
+                <item value="Note 2. Also, instead of ground pork, you can use ground beef or ground turkey."/>
+                <item value="Note 3. You can use Chinese or Vietnamese spring roll wrappers (for deep-frying) if you "/>
+                <item value="can't find lumpia wrappers."/>
               </model>
             </properties>
           </component>
@@ -185,7 +196,7 @@
           <foreground color="-8055011"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="Filipino Carbonara Recipe"/>
+          <text value="Lumpia Recipe"/>
         </properties>
       </component>
       <component id="a1932" class="javax.swing.JLabel" binding="foodImg">
