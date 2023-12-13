@@ -94,13 +94,13 @@
               <model>
                 <item value="1.) In a large pot over medium heat, bring about 4 quarts salted water to a boil. Add spaghetti and cook 1 minute shy of package directions. Remove from heat and drain well. Keep warm."/>
                 <item value="2.) In a wide pan over medium heat, add bacon. Cook, stirring occasionally, until it browns and crisps. With a slotted spoon, remove from heat and drain on paper towels."/>
-                <item value="3.) Discard the rendered fat except for about 1 tablespoon. Add onions and garlic and cook until softened. "/>
+                <item value="3.) Discard the rendered fat except for about 1 tablespoon. Add onions and garlic and cook until softened."/>
                 <item value="4.) Add mushrooms and cook until softened. With a slotted spoon, remove the mushroom mixture from the pan and keep warm."/>
                 <item value="5.) Add butter to pan and heat until melted. Add flour and cook, stirring regularly, for about 1 to 2 minutes or until smooth and lightly browned."/>
-                <item value="6.) Slowly add chicken broth, whisking regularly to prevent lumps. "/>
+                <item value="6.) Slowly add chicken broth, whisking regularly to prevent lumps."/>
                 <item value="7.) Add cream. Lower heat and bring to a simmer. Continue to cook, whisking occasionally, until slightly thickened."/>
                 <item value="8.) Add Parmesan cheese and nutmeg. Season with salt and pepper to taste."/>
-                <item value="9.) Add pasta, bacon, and mushroom mixture. Toss to combine until pasta is coated with sauce and heated through. "/>
+                <item value="9.) Add pasta, bacon, and mushroom mixture. Toss to combine until pasta is coated with sauce and heated through."/>
                 <item value="10.) To serve, garnish with fresh parsley and additional Parmesan cheese. Serve hot."/>
               </model>
               <selectionMode value="2"/>
@@ -198,7 +198,7 @@
           <background color="-256"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <icon value="bukopandan.jpg"/>
+          <icon value="CARBONARA.png"/>
           <text value=""/>
         </properties>
       </component>

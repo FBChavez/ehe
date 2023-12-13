@@ -3,6 +3,7 @@ package AllRecipes;
 import MainPackage.RecipeFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +41,19 @@ public class LecheFlaniFrame extends JFrame {
                 recipeFrame.setVisible(true);
             }
         });
+        JPanel existingPanel = new JPanel();
+        ImageIcon imageIcon = new ImageIcon("lecheflan.jpg"); // Provide the path to your image
+
+        // Create a JLabel for the image
+        JLabel imageLabel = new JLabel();
+        imageLabel.setIcon(imageIcon);
+
+        // Add the image JLabel to the existing GUI
+        existingPanel.add(imageLabel);
+
+        add(existingPanel);
+        pack();
+        setLocationRelativeTo(null);
     }
 
 }

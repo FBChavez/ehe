@@ -88,29 +88,29 @@
               <foreground color="-264983"/>
               <layoutOrientation value="0"/>
               <model>
-                <item value="1.) Using a serrated knife, cut the square lumpia wrappers in half "/>
-                <item value="so that you have two stacks of rectangular wrappers. Place a damp "/>
+                <item value="1.) Using a serrated knife, cut the square lumpia wrappers in half"/>
+                <item value="so that you have two stacks of rectangular wrappers. Place a damp"/>
                 <item value="paper towel over the wrappers to keep them from drying out as you work."/>
-                <item value="2.) Combine the pork, cabbage, garlic, ginger, soy sauce, chicken "/>
-                <item value="bouillon powder (if using), eggs, and ground black pepper in a large "/>
-                <item value="bowl. Using your hands, or a rubber spatula, mix the filling well so "/>
+                <item value="2.) Combine the pork, cabbage, garlic, ginger, soy sauce, chicken"/>
+                <item value="bouillon powder (if using), eggs, and ground black pepper in a large"/>
+                <item value="bowl. Using your hands, or a rubber spatula, mix the filling well so"/>
                 <item value="that the seasonings are evenly distributed."/>
-                <item value="3.) Place one of the rectangular wrappers vertically on your work "/>
-                <item value="surface with the short edge facing you. Place a heaping teaspoon of the "/>
-                <item value="filling on the wrapper about half an inch from the edge closest to you. "/>
-                <item value="Grasp the bottom edge of the wrapper and roll it up and over the filling, "/>
+                <item value="3.) Place one of the rectangular wrappers vertically on your work"/>
+                <item value="surface with the short edge facing you. Place a heaping teaspoon of the"/>
+                <item value="filling on the wrapper about half an inch from the edge closest to you."/>
+                <item value="Grasp the bottom edge of the wrapper and roll it up and over the filling,"/>
                 <item value="continuing to roll until 2 inches of wrapper remain."/>
-                <item value="4.) How to wrap lumpia with spring roll wrapper. "/>
-                <item value="5.) Dip two fingers into a bowl of water, then moisten the last 2 inches "/>
-                <item value="of wrapper with your fingers. Finish rolling the lumpia, then rest it on "/>
+                <item value="4.) How to wrap lumpia with spring roll wrapper."/>
+                <item value="5.) Dip two fingers into a bowl of water, then moisten the last 2 inches"/>
+                <item value="of wrapper with your fingers. Finish rolling the lumpia, then rest it on"/>
                 <item value="its seam. Continue rolling with the rest of the filling and lumpia wrappers."/>
-                <item value="6.) At this point, you can freeze your rolled lumpia if you wish by placing "/>
+                <item value="6.) At this point, you can freeze your rolled lumpia if you wish by placing"/>
                 <item value="them in freezer bags and then into your freezer."/>
-                <item value="7.) To cook the lumpia, fill a large frying pan with about 1/2-inch of "/>
-                <item value="vegetable oil. Heat the oil over medium-high heat. Gently place the lumpia "/>
-                <item value="into the hot oil and fry until golden brown on all sides, 3 to 5 minutes total "/>
+                <item value="7.) To cook the lumpia, fill a large frying pan with about 1/2-inch of"/>
+                <item value="vegetable oil. Heat the oil over medium-high heat. Gently place the lumpia"/>
+                <item value="into the hot oil and fry until golden brown on all sides, 3 to 5 minutes total"/>
                 <item value="(if frying frozen lumpia, it will take 1 to 2 minutes longer)."/>
-                <item value="8.) Place the fried lumpia on paper towels and serve immediately with sweet "/>
+                <item value="8.) Place the fried lumpia on paper towels and serve immediately with sweet"/>
                 <item value="and sour sauce or chili sauce (bottled from the store is fine)."/>
               </model>
               <selectionMode value="2"/>
@@ -136,9 +136,9 @@
               <font name="Constantia" size="12" style="0"/>
               <foreground color="-264983"/>
               <model>
-                <item value="Note 1. You can also add finely minced raw shrimp to the pork mixture if you'd like. "/>
+                <item value="Note 1. You can also add finely minced raw shrimp to the pork mixture if you'd like."/>
                 <item value="Note 2. Also, instead of ground pork, you can use ground beef or ground turkey."/>
-                <item value="Note 3. You can use Chinese or Vietnamese spring roll wrappers (for deep-frying) if you "/>
+                <item value="Note 3. You can use Chinese or Vietnamese spring roll wrappers (for deep-frying) if you"/>
                 <item value="can't find lumpia wrappers."/>
               </model>
             </properties>
@@ -209,7 +209,7 @@
           <background color="-256"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <icon value="bukopandan.jpg"/>
+          <icon value="LUMPIA.png"/>
           <text value=""/>
         </properties>
       </component>
