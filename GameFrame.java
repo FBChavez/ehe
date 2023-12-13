@@ -30,7 +30,7 @@ public class GameFrame extends JFrame{
     // Note: Add functionality to the backButton to return to the menuFrame
     JButton startButton, backButton, choice1, choice2, choice3, choice4;
     JTextArea mainTextArea;
-    int playerHP, scene1EnemiesHP, mentalHP, silverRing;
+    int playerHP, mentalHP, silverRing, scene1EnemiesHP, frostyHP;
     String weapon, position;
 
     TitleScreenHandler tsHandler = new TitleScreenHandler();
@@ -148,7 +148,7 @@ public class GameFrame extends JFrame{
         playerPanel = new JPanel();
         playerPanel.setBounds(100, 15, 600, 50);
         playerPanel.setBackground(Color.black);
-        playerPanel.setLayout(new GridLayout(1,4));
+        playerPanel.setLayout(new GridLayout(1,5));
         con.add(playerPanel);
         hpLabel = new JLabel("HP:");
         hpLabel.setFont(normalFont);
@@ -178,6 +178,7 @@ public class GameFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 // Add the logic to navigate back to the menuFrame
                 dispose();  // Close the current window... Dili mugana
+                window.setVisible(false);
                 MenuFrame menuFrame = new MenuFrame("Francis");  // Replace 'MenuFrame' with your actual class
                 menuFrame.setVisible(true);
             }
@@ -193,8 +194,9 @@ public class GameFrame extends JFrame{
     public void playerSetup(){
 
         playerHP = 10;
-        scene1EnemiesHP = 6;
         mentalHP = 3;
+        scene1EnemiesHP = 6;
+        frostyHP = 20;
         weapon = "None";
         weaponLabelName.setText(weapon);
         hpLabelNumber.setText("" + playerHP);
@@ -232,7 +234,7 @@ public class GameFrame extends JFrame{
         position = "deathWish";
         playerHP = 0;
         hpLabelNumber.setText(""+playerHP);
-        mainTextArea.setText("Your wish is granted! An icicle strikes and pierces your body." +
+        mainTextArea.setText("Your wish is granted! An ice shard strikes and pierces your body." +
                 "\n\nGAME OVER");
 
         choice1.setText("Restart."); //
@@ -269,6 +271,24 @@ public class GameFrame extends JFrame{
         playerHP = 0;
         hpLabelNumber.setText(""+playerHP);
         mainTextArea.setText("The Narrator has had enough of you. A giant snowball crushes you to death." +
+                "\n\nGAME OVER.");
+
+        choice1.setText("Restart"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+        choice1.setVisible(true);
+        choice2.setVisible(false);
+        choice3.setVisible(false);
+        choice4.setVisible(false);
+    }
+
+    // killedByNarrator
+    public void giveUp() {
+        position = "giveUp";
+        playerHP = 0;
+        hpLabelNumber.setText(""+playerHP);
+        mainTextArea.setText("The Narrator left you and you freeze to death." +
                 "\n\nGAME OVER.");
 
         choice1.setText("Restart"); //
@@ -468,7 +488,7 @@ public class GameFrame extends JFrame{
 
         subordinatesDamage = new java.util.Random().nextInt(2);
 
-        mainTextArea.setText("The subordinate/s attacked you and gave " + subordinatesDamage + " damage!");
+        mainTextArea.setText("The subordinate/s attacked you and dealt " + subordinatesDamage + " damage!");
 
         playerHP = playerHP - subordinatesDamage;
         if (playerHP < 1) {
@@ -497,7 +517,7 @@ public class GameFrame extends JFrame{
         position = "candyDistraction";
         mainTextArea.setText("Distracting them by throwing candy canes on the window to make noise gives you the upper hand." +
                 "Presents are retrieved." +
-                "\n\nYou escape with a scratch and lose 1 health.");
+                "\n\nYou escape with a scratch and lose 1 health points.");
 
         choice1.setText("It somehow worked."); //
         choice2.setText("");
@@ -508,7 +528,7 @@ public class GameFrame extends JFrame{
     // Scene 1 Choice 4
     public void negotiate() {
         position = "negotiate";
-        mainTextArea.setText("Negotiation fail, and the Grinches attacked you. Prepare for a fight.");
+        mainTextArea.setText("Negotiation fails, and the Grinches attacks you. Prepare for a fight.");
 
         choice1.setText(">"); //
         choice2.setText("");
@@ -520,7 +540,7 @@ public class GameFrame extends JFrame{
     public void scene1End() {
         position = "scene1End";
         mainTextArea.setText("Narrator: Thank you for retrieving these presents, but there is still more to be saved. " +
-                "You see more of Grinch's henchmen outside running. " +
+                "Grinch's henchmen are up to something." +
                 "\n\nWhat will you do?");
 
         choice1.setText("(Chase them)"); //
@@ -557,7 +577,7 @@ public class GameFrame extends JFrame{
         position = "friendlyInteraction";
         mainTextArea.setText("Your attempt to befriend the snow creatures is successful. " +
                 "The snow spirits appreciate your kindness and let you pass unharmed." +
-                "\n\nYou gained 3 Health Points.");
+                "\n\nYou gain 3 Health Points.");
 
         choice1.setText("Thank you spirits!"); //
         choice2.setText("Yay, I'm healed!"); //
@@ -593,7 +613,7 @@ public class GameFrame extends JFrame{
     public void giftOffering() {
         position = "giftOffering";
         mainTextArea.setText("The creatures love the sweet gifts and allow you to pass." +
-                "\n\nYou gained 3 Health Points and an upgrade to your Knife.");
+                "\n\nYou gain 3 Health Points and an upgrade to your Knife.");
 
         weapon = "Knife(+3)";
         weaponLabelName.setText(weapon);
@@ -630,16 +650,192 @@ public class GameFrame extends JFrame{
     // Scene 3 Start
     public void scene3() {
         position = "scene3";
-        mainTextArea.setText("You arrived at the Ice Caverns." +
+        mainTextArea.setText("You arrive at the Ice Caverns." +
                 "\n\nWhat will you do?");
 
         choice1.setText("(Cautious Descent)"); //
         choice2.setText("(Speedy Descent)"); //
-        choice3.setText("(Use Ice Picks)"); //
+        choice3.setText("(Call Narrator)"); //
         choice4.setText("(Find Another Route)"); //
     }
 
+    // Scene 3 Choice 1
+    public void cautiousDescent() {
+        position = "cautiousDescent";
+        mainTextArea.setText("You descend cautiously, avoiding traps and keeping your health intact.");
 
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 3 Choice 2
+    public void speedyDescent() {
+        position = "speedyDescent";
+        mainTextArea.setText("An icicle hits you." +
+                "\n\nYou lose 5 Health Points.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 3 Choice 3
+    public void callNarrator() {
+        position = "callNarrator";
+        mainTextArea.setText("Narrator: My advice is to look for another path.");
+
+        choice1.setText("(Find Another Route)"); //
+        choice2.setText("(Cautious Descent)"); //
+        choice3.setText("(Speedy Descent)"); //
+        choice4.setText("I give up!"); //
+
+    }
+
+    // Scene 3 Choice 4
+    public void findAnotherRoute() {
+        position = "findAnotherRoute";
+        mainTextArea.setText("You find an alternate path and encounter a Frost Giant." +
+                "\n\nWhat will you do?");
+
+        choice1.setText("(Attack him)"); //
+        choice2.setText("(Ignore him)"); //
+        choice3.setText("(Talk to him)"); //
+        choice4.setText("(Run)"); //
+    }
+
+    public void attackFrosty() {
+        position = "attackFrosty";
+        mainTextArea.setText("The Frost Giant is offended by your aggression. " +
+                "Now you have an angry Frost Giant to deal with.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void ignoreFrosty() {
+        position = "ignoreFrosty";
+        mainTextArea.setText("The Frost Giant feels ignored and gets upset. " +
+                "He unleashes a freezing gust of wind. " +
+                "Looks like ignoring him wasn't the best choice." +
+                "\n\nYou lose 3 Health Points.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void talkToFrosty() {
+        position = "talkToFrosty";
+        mainTextArea.setText("Frosty the Frost Giant is lonely and appreciates your company. " +
+                "He allows you to pass peacefully and even shares a warming spell." +
+                "\n\nYou gain 3 Health Points.");
+
+        choice1.setText("Goodbye Frosty!"); //
+        choice2.setText("I'll be back."); //
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void runFromFrosty() {
+        position = "runFromFrosty";
+        mainTextArea.setText("The Frost Giant is slow but persistent. " +
+                "You manage to outrun him, but not without sustaining " +
+                "some minor injuries from his icy attack." +
+                "\n\nYou lose 2 Health Points.");
+
+        choice1.setText(">"); //
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void playerAttackScene3(){
+        position = "playerAttackScene3";
+
+        int playerDamage = 0;
+
+        if(weapon.equals("Knife")){
+            playerDamage = new java.util.Random().nextInt(4);
+        }
+
+        if(weapon.equals("Knife(+3)")){
+            playerDamage = (new java.util.Random().nextInt(4)) + 3;
+        }
+
+        mainTextArea.setText("You attacked the Frost Giant and dealt " + playerDamage + " damage!");
+
+        frostyHP = frostyHP - playerDamage;
+
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void frostyAttackScene3(){
+        position = "frostyAttackScene3";
+
+        int frostyDamage = 0;
+
+        frostyDamage = (new java.util.Random().nextInt(4)) + 2;
+
+        mainTextArea.setText("The Frost Giant unleashed a hail storm and dealt " + frostyDamage + " damage!");
+
+        playerHP = playerHP - frostyDamage;
+        if (playerHP < 1) {
+            playerHP = 0;
+        }
+        hpLabelNumber.setText(""+playerHP);
+
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void successfulFight3() {
+        position = "successfulFight3";
+        mainTextArea.setText("Narrator: I am impressed with your skills." +
+                " Here is a reward for you." +
+                "\n\nYou gain 7 Health Points and a new weapon.");
+
+        weapon = "Sword";
+        weaponLabelName.setText(weapon);
+
+        choice1.setText("How am I alive?!"); //
+        choice2.setText("Now you're talking."); //
+        choice3.setText("It's a sword!"); //
+        choice4.setText("...");
+    }
+
+    // Scene 3 End
+    public void scene3End() {
+        position = "scene3End";
+        mainTextArea.setText("Narrator: After reaching the end of the Ice Caverns, " +
+                "you follow the path leading to the Grinch's lair where he's guarding the stolen presents.");
+
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    // Scene 4 Start
+    public void scene4() {
+        position = "scene4";
+        mainTextArea.setText("\n\nWhat will you do?");
+
+        choice1.setText("()"); //
+        choice2.setText("()"); //
+        choice3.setText("()"); //
+        choice4.setText("()"); //
+    }
 
     public class TitleScreenHandler implements ActionListener{
 
@@ -976,22 +1172,164 @@ public class GameFrame extends JFrame{
                 case "scene3":
                     switch(yourChoice){
                         case "c1":
-
+                            cautiousDescent();
                             break;
                         case "c2":
-
+                            playerHP = playerHP - 5;
+                            hpLabelNumber.setText(""+playerHP);
+                            if(playerHP < 1) {
+                                playerHP = 0;
+                                lose();
+                            } else {
+                                speedyDescent();
+                            }
                             break;
                         case "c3":
-
+                            callNarrator();
                             break;
                         case "c4":
-
+                            findAnotherRoute();
                             break;
                     }
                     break;
+                // Scene 3 Outcomes
+                case "cautiousDescent", "speedyDescent", "ignoreFrosty", "runFromFrosty":
+                    switch(yourChoice){
+                        case "c1":
+                            scene3End();
+                            break;
+                    }
+                    break;
+                case "callNarrator":
+                    switch(yourChoice){
+                        case "c1":
+                            findAnotherRoute();
+                            break;
+                        case "c2":
+                            cautiousDescent();
+                            break;
+                        case "c3":
+                            playerHP = playerHP - 5;
+                            hpLabelNumber.setText(""+playerHP);
+                            if(playerHP < 1) {
+                                playerHP = 0;
+                                lose();
+                            } else {
+                                speedyDescent();
+                            }
+                            break;
+                        case "c4":
+                            giveUp();
+                            break;
+                    }
+                    break;
+                case "findAnotherRoute":
+                    switch(yourChoice){
+                        case "c1":
+                            attackFrosty();
+                            break;
+                        case "c2":
+                            playerHP = playerHP - 3;
+                            hpLabelNumber.setText(""+playerHP);
+                            if(playerHP < 1) {
+                                playerHP = 0;
+                                lose();
+                            } else {
+                                ignoreFrosty();
+                            }
+                            break;
+                        case "c3":
+                            playerHP = playerHP + 3;
+                            hpLabelNumber.setText(""+playerHP);
+                            talkToFrosty();
+                            break;
+                        case "c4":
+                            playerHP = playerHP - 2;
+                            hpLabelNumber.setText(""+playerHP);
+                            if(playerHP < 1) {
+                                playerHP = 0;
+                                lose();
+                            } else {
+                                runFromFrosty();
+                            }
+                            break;
+                    }
+                    break;
+                case "talkToFrosty":
+                    switch(yourChoice){
+                        case "c1":
+                            scene3End();
+                            break;
+                        case "c2":
+                            scene3End();
+                            break;
+                    }
+                    break;
+                case "attackFrosty":
+                    switch(yourChoice){
+                        case "c1":
+                            playerAttackScene3();
+                            break;
+                    }
+                    break;
+                // Scene 3 Fights
+                case "playerAttackScene3":
+                    switch(yourChoice){
+                        case "c1":
+                            if(frostyHP > 0) {
+                                frostyAttackScene3();
+                            } else {
+                                mentalHP = 3;
+                                playerHP = playerHP + 7;
+                                hpLabelNumber.setText(""+playerHP);
+                                successfulFight3();
+                            }
+                            break;
+                    }
+                    break;
+                case "frostyAttackScene3":
+                    switch(yourChoice){
+                        case "c1":
+                            if(playerHP > 0) {
+                                playerAttackScene3();
+                            }
+                            else {
+                                playerHP = 0;
+                                lose();
+                            }
+                            break;
+                    }
+                    break;
+                case "successfulFight3":
+                    switch(yourChoice){
+                        case "c1":
+                            scene3End();
+                            break;
+                        case "c2":
+                            scene3End();
+                            break;
+                        case "c3":
+                            scene3End();
+                            break;
+                        case "c4":
+                            mentalHP = mentalHP -1;
+                            scene3End();
+                            break;
+                    }
+                    break;
+                // Scene 3 End
+                case "scene3End":
+                    switch(yourChoice){
+                        case "c1":
+                            scene4();
+                            break;
+                    }
+                    break;
+            // Scene 4 Start
+
 
             // Death events
-                case "deathWish", "emotionalDeath", "lose", "killedByNarrator":
+                case "deathWish", "emotionalDeath", "lose", "killedByNarrator", "giveUp":
                     switch(yourChoice){
                         case "c1": restart();
                         break;
