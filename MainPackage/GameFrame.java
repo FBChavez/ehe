@@ -314,7 +314,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: If you won't respond properly, your health will eventually decrease.");
 
         choice1.setText("I'll talk, spare me."); //
-        choice2.setText("(Remain Quiet)"); //
+        choice2.setText("(Be Sad)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -324,7 +324,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: I'll guide you in saving Santa's Presents. Let's go, shall we?");
 
         choice1.setText("To Santa's Workshop!"); //
-        choice2.setText("(Be sad)"); //
+        choice2.setText("(Remain Quiet)"); //
         choice3.setText("");
         choice4.setText("");
     }
