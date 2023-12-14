@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static javax.swing.SwingUtilities.invokeLater;
+
 public class MenuFrame extends JFrame {
 
     public MenuFrame(String name) {
@@ -108,8 +110,10 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                GameFrame gameFrame= new GameFrame();
-                gameFrame.setVisible(true);
+                invokeLater(() -> {
+                    GameFrame gameFrame= new GameFrame(name);
+                    gameFrame.setVisible(true);
+                });
             }
         });
 
