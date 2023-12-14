@@ -335,7 +335,7 @@ public class GameFrame extends JFrame{
         choice1.setText("Oh no!"); //
         choice2.setText("How naughty!"); //
         choice3.setText("Not the presents!"); //
-        choice4.setText("..."); //
+        choice4.setText("(Remain Quiet)"); //
     }
 
     public void prelude2(){
@@ -344,7 +344,7 @@ public class GameFrame extends JFrame{
         choice1.setText("Bring it on!"); //
         choice2.setText("Let's go!"); //
         choice3.setText("Why me?"); //
-        choice4.setText("..."); //
+        choice4.setText("(Remain Quiet)"); //
     }
 
     public void prelude3(){
@@ -353,16 +353,16 @@ public class GameFrame extends JFrame{
         choice1.setText("Uhm, if you say so."); //
         choice2.setText("I don't got this."); //
         choice3.setText("I would rather die."); //
-        choice4.setText("..."); //
+        choice4.setText("(Remain Quiet)"); //
     }
 
     public void prelude4(){
         position = "prelude4";
         mainTextArea.setText("Narrator: You really got this!");
-        choice1.setText("... I'll trust you."); //
+        choice1.setText("(I'll trust you."); //
         choice2.setText("Okay, fine."); //
         choice3.setText("I would rather die."); //
-        choice4.setText("..."); //
+        choice4.setText("(Remain Quiet)"); //
     }
 
     // Receiving Weapon
@@ -376,7 +376,7 @@ public class GameFrame extends JFrame{
         choice1.setText("Thank you."); //
         choice2.setText("Where's my sword?"); //
         choice3.setText("Who are you anyway?"); //
-        choice4.setText("..."); //
+        choice4.setText("(Remain Quiet)"); //
     }
 
     public void noSword() {
@@ -384,7 +384,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: This Knife is sufficient for now. Don't ask for more.");
 
         choice1.setText("If you say so."); //
-        choice2.setText("..."); //
+        choice2.setText("(Remain Quiet)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -396,7 +396,7 @@ public class GameFrame extends JFrame{
         choice1.setText("Please keep me safe."); //
         choice2.setText("(Attack Him)"); //
         choice3.setText("I will trust you."); //
-        choice4.setText("..."); //
+        choice4.setText("(Remain Quiet)"); //
     }
 
     public void attackNarrator() {
@@ -406,7 +406,7 @@ public class GameFrame extends JFrame{
 
         choice1.setText("Okay, I'll trust you"); //
         choice2.setText("(Attack Him Again)"); //
-        choice3.setText("..."); //
+        choice3.setText("(Remain Quiet)"); //
         choice4.setText("");
     }
 
@@ -415,7 +415,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: If you won't respond properly, your health will eventually decrease.");
 
         choice1.setText("I'll talk, spare me."); //
-        choice2.setText("..."); //
+        choice2.setText("(Remain Quiet)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -425,7 +425,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: I'll guide you in saving Santa's Presents. Let's go, shall we?");
 
         choice1.setText("To Santa's Workshop!"); //
-        choice2.setText("..."); //
+        choice2.setText("(Be sad)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -556,7 +556,7 @@ public class GameFrame extends JFrame{
                 "\n\nWhat will you do?");
 
         choice1.setText("(Chase them)"); //
-        choice2.setText("..."); //
+        choice2.setText("(Remain Still)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -566,7 +566,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: Don't just stand there and do nothing.");
 
         choice1.setText("(Chase them)"); //
-        choice2.setText("..."); //
+        choice2.setText("(Remain Quiet)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -644,7 +644,7 @@ public class GameFrame extends JFrame{
                 "\n\nWhat will you do?");
 
         choice1.setText("(Follow them)"); //
-        choice2.setText("..."); //
+        choice2.setText("(Enjoy the view)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -654,7 +654,7 @@ public class GameFrame extends JFrame{
         mainTextArea.setText("Narrator: You'll freeze to death if you don't move.");
 
         choice1.setText("(Follow them)"); //
-        choice2.setText("..."); //
+        choice2.setText("(Ignore him)"); //
         choice3.setText("");
         choice4.setText("");
     }
@@ -836,7 +836,7 @@ public class GameFrame extends JFrame{
         choice1.setText("How am I alive?!"); //
         choice2.setText("Now you're talking."); //
         choice3.setText("It's a sword!"); //
-        choice4.setText("...");
+        choice4.setText("(Remain Quiet)");
     }
 
     // Scene 3 End
@@ -1237,7 +1237,7 @@ public class GameFrame extends JFrame{
                             deathWish();
                             break;
                         case "c4":
-                            dealMentalDamage(1);
+                            dealMentalDamage(3);
                             if(playerHP < 1) {
                                 emotionalDeath();
                             }
@@ -1870,6 +1870,7 @@ public class GameFrame extends JFrame{
                 case "ending":
                     switch(yourChoice){
                         case "c1":
+                            weapon = "Slay!";
                             restart();
                             break;
                     }
