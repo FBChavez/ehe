@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class ExchangeGiftsFrame extends JFrame {
     public ExchangeGiftsFrame(String name) {
         setTitle("Merry Christmas Greeting");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1122, 793);
+        setSize(612, 416);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -27,34 +28,19 @@ public class ExchangeGiftsFrame extends JFrame {
                 "<center>Hey there, " + name + "!<br> Are you excited to know who your manito/manita is?</center>" +
                 "</html>";
 
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        ImageIcon gifIcon = new ImageIcon("manito-manita.jpg");
+        JLabel gifLabel = new JLabel(gifIcon);
 
+        // Set the content pane to the JLabel
+        setContentPane(gifLabel);
+
+        // Create and add components
         JLabel label = new JLabel(lbl);
+
         JButton tofindManits = new JButton("SO EXCITED!");
 
-        tofindManits.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String manito = findManits(name);
-                if (manito != null) JOptionPane.showMessageDialog(null, "<html>Your manito/manita is <br>" + manito + "!</html>");
-            }
-        });
-
-        lists = getManits(name);
-
-        label.setHorizontalAlignment(JLabel.CENTER);
-
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 1;
-        panel.add(label, constraints);
-
-        constraints.gridy = 1;
-        panel.add(tofindManits, constraints);
-
         JButton backButton = new JButton("Back");
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,10 +50,37 @@ public class ExchangeGiftsFrame extends JFrame {
             }
         });
 
-        constraints.gridy = 2; // Set the grid Y position for the back button
-        panel.add(backButton, constraints); // Add the back button to the panel
+        tofindManits.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String manito = findManits(name);
+                if (manito != null) JOptionPane.showMessageDialog(null, "<html>Your manito/manita is <br>" + manito + "!</html>");
+            }
+        });
+        lists = getManits(name);
 
-        add(panel);
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        panel.add(label, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        panel.add(tofindManits, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        panel.add(backButton, gbc);
+
+        // Set the content pane to the JPanel
+        setLayout(new BorderLayout());
+        add(panel, BorderLayout.CENTER);
     }
 
     private ArrayList<String> getManits(String name){
