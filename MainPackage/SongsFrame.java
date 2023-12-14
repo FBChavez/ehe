@@ -179,6 +179,9 @@ public class SongsFrame extends JFrame {
         Collections.shuffle(songList);
         String randomSong = songList.get(new Random().nextInt(songList.size()));
         songsList.setSelectedValue(randomSong, true);
+
+        clipTimePosition = 0;
+
         isShufflePlaying = true;
         playSelectedSong();
     }
@@ -233,13 +236,13 @@ public class SongsFrame extends JFrame {
         }
     }
 
-    private void playRandomSong() {
-        List<String> songList = Collections.list(listModel.elements());
-        Collections.shuffle(songList);
-        String randomSong = songList.get(new Random().nextInt(songList.size()));
-        songsList.setSelectedValue(randomSong, true);
-        playSelectedSong();
-    }
+//    private void playRandomSong() {
+//        List<String> songList = Collections.list(listModel.elements());
+//        Collections.shuffle(songList);
+//        String randomSong = songList.get(new Random().nextInt(songList.size()));
+//        songsList.setSelectedValue(randomSong, true);
+//        playSelectedSong();
+//    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
