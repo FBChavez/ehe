@@ -100,8 +100,10 @@ public class SongsFrame extends JFrame {
         shuffleButton.addActionListener(e -> {
             pauseSelectedSong(); // Pause if currently playing
             stopSong();
+
             progressBar.setValue(0); // Reset progress bar for shuffle
             playRandomSongOnce();
+
         });
 
         progressBar = new JProgressBar(0, 100);
