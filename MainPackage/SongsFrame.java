@@ -37,7 +37,14 @@ public class SongsFrame extends JFrame {
 
         songsList = new JList<>(listModel);
         songsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        songsList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel renderer = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                renderer.setHorizontalAlignment(SwingConstants.CENTER); // Align text to the center
+                return renderer;
+            }
+        });
         JButton playButton = new JButton("Play");
         JButton pauseButton = new JButton("Pause");
         JButton backButton = new JButton("Back");
@@ -88,24 +95,30 @@ public class SongsFrame extends JFrame {
         progressBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int mouseX = e.getX();
-                double width = progressBar.getWidth();
-                double newPercentage = (mouseX / width) * 100;
-                progressBar.setValue((int) newPercentage);
-                clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
-                clip.setMicrosecondPosition(clipTimePosition);
-                isDragging = true;
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (isDragging) {
+                if (clip != null) { // Add a null check for clip
                     int mouseX = e.getX();
                     double width = progressBar.getWidth();
                     double newPercentage = (mouseX / width) * 100;
                     progressBar.setValue((int) newPercentage);
-                    clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
-                    clip.setMicrosecondPosition(clipTimePosition);
+                    if (clip.getMicrosecondLength() != 0) { // Check if clip's length is not zero
+                        clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                        clip.setMicrosecondPosition(clipTimePosition);
+                    }
+                    isDragging = true;
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (isDragging && clip != null) { // Add null check for clip
+                    int mouseX = e.getX();
+                    double width = progressBar.getWidth();
+                    double newPercentage = (mouseX / width) * 100;
+                    progressBar.setValue((int) newPercentage);
+                    if (clip.getMicrosecondLength() != 0) { // Check if clip's length is not zero
+                        clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                        clip.setMicrosecondPosition(clipTimePosition);
+                    }
                     isDragging = false;
                 }
             }
@@ -132,9 +145,18 @@ public class SongsFrame extends JFrame {
 
         progressPanel.add(progressBar, BorderLayout.CENTER);
 
-        contentPanel.add(new JScrollPane(songsList), BorderLayout.CENTER);
-        contentPanel.add(progressPanel, BorderLayout.SOUTH);
-        contentPanel.add(controlPanel, BorderLayout.NORTH);
+        // Create a panel for the song list with a scroll pane
+        JPanel songsListPanel = new JPanel(new BorderLayout());
+        songsListPanel.setPreferredSize(new Dimension(400, 130));
+        songsListPanel.setBorder(BorderFactory.createTitledBorder("Cristmas Songs List"));
+
+        JScrollPane songsScrollPane = new JScrollPane(songsList);
+        songsListPanel.add(songsScrollPane, BorderLayout.CENTER);
+
+        // Add the song list panel to the content panel
+        contentPanel.add(songsListPanel, BorderLayout.NORTH);
+        contentPanel.add(progressPanel, BorderLayout.CENTER);
+        contentPanel.add(controlPanel, BorderLayout.SOUTH);
 
         getContentPane().add(contentPanel);
     }

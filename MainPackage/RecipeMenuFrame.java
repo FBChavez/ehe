@@ -22,8 +22,8 @@ public class RecipeMenuFrame extends JFrame {
         // Set the content pane to the JLabel
         setContentPane(gifLabel);
         // Create a JLabel for the title
-        JLabel titleLabel = new JLabel("Here are some of the precious recipes from Nina's Carenderia");
-        titleLabel.setFont(new Font("Cambria", Font.BOLD, 24));
+        JLabel titleLabel = new JLabel(" ");
+        titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -66,6 +66,10 @@ public class RecipeMenuFrame extends JFrame {
         Image imageG1 = carbsBtn.getImage();
         Image imageG2 = imageG1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
         pastaBtn.setIcon(new ImageIcon(imageG2));
+
+        JButton backButton = new JButton("Back");
+        backButton.setPreferredSize(new Dimension(300, 50));
+
 
         // Add ActionListener to buttons
         bukopandanBtn.addActionListener(new ActionListener() {
@@ -114,6 +118,14 @@ public class RecipeMenuFrame extends JFrame {
                 pastaCarbonaraFrame.setVisible(true);
             }
         });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                MenuFrame menuFrame = new MenuFrame(name);
+                menuFrame.setVisible(true);
+            }
+        });
 
         // Set layout and add components
         setLayout(new GridBagLayout());
@@ -139,6 +151,9 @@ public class RecipeMenuFrame extends JFrame {
 
         gbc.gridy = 5;
         add(pastaBtn, gbc);
+
+        gbc.gridy = 6;
+        add(backButton, gbc);
     }
 
     private JButton createButton() {
