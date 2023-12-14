@@ -88,10 +88,16 @@
               <foreground color="-264983"/>
               <layoutOrientation value="0"/>
               <model>
-                <item value="1.) In a pot, combine pork belly, salt, peppercorn, bay leaves, soy sauce, garlic, and water. Bring to boil. Let it cook until meat is fork-tender."/>
-                <item value="2.) Remove the pork belly from water and let the excess water completely drain. Transfer to a plate and then rub 1 tablespoon of salt all over the meat. Put in the fridge overnight to dry out."/>
-                <item value="3.) Cut in cubes, about an inch thick. Heat oil in a wok or pot over medium-high heat. Once the oil is hot, fry each side of a cut for 5 minutes while sprinkling the skin with ice-cold water and letting it crackle from time to time."/>
-                <item value="4.) Remove from hot oil and transfer into a plate lined with kitchen paper towel to remove excess oil.  Serve while still hot with your fave dipping sauce!"/>
+                <item value="1.) In a pot, combine pork belly, salt, peppercorn, bay leaves, soy sauce, garlic, and water."/>
+                <item value=" Bring to boil. Let it cook until meat is fork-tender."/>
+                <item value="2.) Remove the pork belly from water and let the excess water completely drain. Transfer to"/>
+                <item value=" a plate and then rub 1 tablespoon of salt all over the meat. Put in the fridge overnight to"/>
+                <item value=" dry out."/>
+                <item value="3.) Cut in cubes, about an inch thick. Heat oil in a wok or pot over medium-high heat. Once"/>
+                <item value=" the oil is hot, fry each side of a cut for 5 minutes while sprinkling the skin with ice-cold"/>
+                <item value=" water and letting it crackle from time to time."/>
+                <item value="4.) Remove from hot oil and transfer into a plate lined with kitchen paper towel to remove"/>
+                <item value=" excess oil.  Serve while still hot with your fave dipping sauce!"/>
               </model>
               <selectionMode value="2"/>
             </properties>
@@ -116,9 +122,12 @@
               <font name="Constantia" size="12" style="0"/>
               <foreground color="-264983"/>
               <model>
-                <item value="Note 1. Make sure that the oil is hot and try to keep it that way all throughout while frying the pork pieces."/>
-                <item value="Note 2. Do not fry frozen pork as it will cook unevenly and will affect the oil temperature."/>
-                <item value="Note 3. Do not crowd the pot or pan while frying, fry them in small batches and they will cook faster and more even."/>
+                <item value="Note 1. Make sure that the oil is hot and try to keep it that way all throughout while"/>
+                <item value=" frying the pork pieces."/>
+                <item value="Note 2. Do not fry frozen pork as it will cook unevenly and will affect the"/>
+                <item value=" oil temperature."/>
+                <item value="Note 3. Do not crowd the pot or pan while frying, fry them in small batches and they"/>
+                <item value=" will cook faster and more even."/>
               </model>
             </properties>
           </component>

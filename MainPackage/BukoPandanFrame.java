@@ -26,7 +26,7 @@ public class BukoPandanFrame extends JFrame {
         this.playerName = name;
         setTitle("Christmas Recipes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 675);
+        setSize(660, 730);
         setResizable(false);
         setLocationRelativeTo(null);
         setContentPane(jPanel);

@@ -116,6 +116,21 @@ public class DecorateFrame extends JFrame{
 
         initializeGame();
         setButtonListeners();
+
+        ImageIcon backgroundImage = new ImageIcon("background/santaworkshop.png");
+        JLabel backgroundLabel = new JLabel(backgroundImage);
+        backgroundLabel.setLayout(new BorderLayout());
+
+        textPanel.setOpaque(false);
+        boardPanel.setOpaque(false);
+        buttonPanel.setOpaque(false);
+
+        backgroundLabel.add(textPanel, BorderLayout.NORTH);
+        backgroundLabel.add(boardPanel, BorderLayout.CENTER);
+        backgroundLabel.add(buttonPanel, BorderLayout.SOUTH);
+
+        getContentPane().add(backgroundLabel);
+
         setVisible(true);
 
     }
