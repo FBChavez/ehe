@@ -138,7 +138,7 @@ public class RecipeMenuFrame extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(100, 0, 20, 0); // Adjusted top inset
+        gbc.insets = new Insets(100, 0, 20, 0);
         add(titleLabel, gbc);
 
         gbc.gridy = 1;
@@ -163,9 +163,7 @@ public class RecipeMenuFrame extends JFrame {
 
     private JButton createButton() {
         JButton button = new JButton();
-       // button.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size
-        button.setPreferredSize(new Dimension(300, 50)); // Set preferred size
-//        button.setBackground(new Color(109,113,46));
+        button.setPreferredSize(new Dimension(300, 50));
         return button;
     }
 }
