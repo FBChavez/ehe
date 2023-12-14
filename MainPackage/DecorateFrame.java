@@ -52,7 +52,7 @@ public class DecorateFrame extends JFrame{
         }
     }
 
-    private int currentImageIndex;
+    private int currentImageIndex = 0;
     int numRows = 6;
     int numCols = numRows;
     private int moves = 10;
@@ -81,7 +81,6 @@ public class DecorateFrame extends JFrame{
 
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
 
-
         textPanel.setLayout(new BorderLayout());
         textPanel.add(imageLabel);
         add(textPanel, BorderLayout.NORTH);
@@ -97,6 +96,7 @@ public class DecorateFrame extends JFrame{
             BufferedImage img8 = ImageIO.read(new File("trees/tree8.png"));
 
             images = new BufferedImage[]{img1, img4, img6, img7, img2, img5, img3, img8};
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,27 +107,6 @@ public class DecorateFrame extends JFrame{
         boardPanel.setLayout(new GridLayout(numRows, numCols));
         boardPanel.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200)); //murag ni sha margin sa boardPanel
         add(boardPanel);
-
-        for (int r = 0; r < numRows; r++) {
-            for (int c = 0; c < numCols; c++) {
-                Buttons btn = new Buttons(r, c);
-                board[r][c] = btn;
-
-                btn.setFocusable(false);
-                btn.setMargin(new Insets(0,0,0,0));
-                btn.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30)); //para ni sa mga question mark (hint)
-                //pwede ra tangtangon si font if mag sa pag hatag hints/sa snowflake
-
-                clicking(btn);
-
-                boardPanel.add(btn);
-            }
-        }
-
-        setVisible(true); //sa frame ni
-
-        setSnowflake();
-
         // Add buttons and moves label
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(movesLabel);
@@ -135,65 +114,110 @@ public class DecorateFrame extends JFrame{
         buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Action listener for the restart button
-        restartButton.addActionListener(e -> restartGame());
-
-        // Action listener for the back button (change this to go back to name page logic)
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                MenuFrame menuFrame = new MenuFrame(name);
-                menuFrame.setVisible(true);
-            }
-        });
+        initializeGame();
+        setButtonListeners();
+        setVisible(true);
 
     }
 
-    void clicking(Buttons btn){
-        btn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { //pwede ramn unta ni actionlistener pero nanguha rakog code somewhere hehe
+//    currentImageIndex = 0;
+    private void initializeGame() {
 
-                Buttons btn = (Buttons) e.getSource();
-                //left click
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    updateMovesLabel();
+        setImage(images[currentImageIndex]);
 
-                    if (btn.getText() == "") {
-                        btn.setEnabled(false);
+        boardPanel.setLayout(new GridLayout(numRows, numCols));
+        boardPanel.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200));
 
-                        if (surprise.contains(btn)) {
-                            currentImageIndex = (currentImageIndex + 1) % images.length;
-                            setImage(images[currentImageIndex]);
+        // Initialize the game board
+        initializeBoard();
+    }
 
-                            ButtonDecorate snowflake = new HiddenSnowflake(btn);
-                            btn.setDecorate(snowflake);
-                            btn.hiddenSnowflake();
+    private void initializeBoard() {
 
-                            if (currentImageIndex != images.length-1) {
-                                JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
-                                restartGame(); //mag restart ang game until sa last image then ambot unsay mahitabo after ana
-                            } else { //balik sa menu if fully decorerated na ang tree
-                                JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the Christmas Tree!");
-                                MenuFrame menu = new MenuFrame(name);
-                                setVisible(false);
-                                menu.setVisible(true);
-                            }
-                            gameOver = true;
-                        } else {
-                            hint(btn.r, btn.c, btn);
-                        }
-                    }
-                }
-                if (!gameOver) {
-                    if (moves < 1) { //after 10 moves kay balik
-                        JOptionPane.showMessageDialog(null, "You've reached the maximum number of moves. Restarting the game.");
-                        restartGame();
-                    }
-                }
+        surprise = new ArrayList<>();
+        moves = 11;
+        updateMovesLabel();
+
+        boardPanel.removeAll();
+
+        // Initialize the game board buttons
+        for (int r = 0; r < numRows; r++) {
+            for (int c = 0; c < numCols; c++) {
+                Buttons btn = new Buttons(r, c);
+                board[r][c] = btn;
+
+                btn.setFocusable(false);
+                btn.setMargin(new Insets(0, 0, 0, 0));
+                btn.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
+
+                boardPanel.add(btn);
             }
-        });
+        }
+
+        setSnowflake();
+    }
+
+    private void setButtonListeners() {
+        restartButton.addActionListener(e -> restartGame());
+        backButton.addActionListener(e -> returnToMenu());
+
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                Buttons btn = board[i][j];
+                btn.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        btn.setEnabled(false);
+                        updateMovesLabel();
+                        handleButtonClick(btn);
+                    }
+                });
+            }
+        }
+    }
+
+    private void handleButtonClick(Buttons btn) {
+        if (!gameOver && moves > 0) {
+
+            if (surprise.contains(btn)) {
+                handleSurpriseButtonClick(btn);
+            } else {
+                hint(btn.r, btn.c, btn);
+            }
+        } else if (moves <= 0) {
+            JOptionPane.showMessageDialog(null, "You've reached the maximum number of moves. Restarting the game.");
+            restartGame();
+        }
+    }
+
+    private void handleSurpriseButtonClick(Buttons btn) {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        setImage(images[currentImageIndex]);
+
+        ButtonDecorate snowflake = new HiddenSnowflake(btn);
+        btn.setDecorate(snowflake);
+        btn.hiddenSnowflake();
+
+        if (currentImageIndex != images.length - 1) {
+            JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
+            restartGame();
+        } else {
+            JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the Christmas Tree!");
+            returnToMenu();
+        }
+        gameOver = true;
+    }
+
+    private void restartGame() {
+        gameOver = false;
+        initializeBoard();
+        setButtonListeners();
+    }
+
+    private void returnToMenu() {
+        dispose();
+        MenuFrame menuFrame = new MenuFrame(name);
+        menuFrame.setVisible(true);
     }
 
     void setSnowflake(){
@@ -216,24 +240,6 @@ public class DecorateFrame extends JFrame{
                 (r == posR && c == posC+1)) btn.setText("?");
     }
 
-    //mu restart ang game if mahutdan shag moves
-    private void restartGame() {
-        surprise.clear();
-
-        moves = 10; // Reset the moves to the initial value
-        updateMovesLabel();
-
-        // Reset the tree and set a new surprise snowflake
-        for (int r = 0; r < numRows; r++) {
-            for (int c = 0; c < numCols; c++) {
-                Buttons btn = board[r][c];
-                btn.setText("");
-                btn.setEnabled(true);
-                clicking(btn);
-            }
-        }
-        setSnowflake();
-    }
 
     private void updateMovesLabel() {
         moves = moves - 1;
@@ -246,9 +252,3 @@ public class DecorateFrame extends JFrame{
         imageLabel.setIcon(icon);
     }
 }
-
-//note:
-// mu repeat until ma fully decorate na ang tree
-// button for back to main menu
-// if usa lng na round, then mag while (big note na daghan modification ani especially sa hint() )
-// basta kana ang idea
