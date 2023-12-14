@@ -1870,7 +1870,6 @@ public class GameFrame extends JFrame{
                 case "ending":
                     switch(yourChoice){
                         case "c1":
-                            weapon = "Slay!";
                             restart();
                             break;
                     }
