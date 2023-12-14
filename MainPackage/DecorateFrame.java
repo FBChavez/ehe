@@ -163,7 +163,6 @@ public class DecorateFrame extends JFrame{
     }
 
     private void initializeBoard() {
-
         surprise = new ArrayList<>();
         moves = 11;
         updateMovesLabel();
@@ -274,6 +273,12 @@ public class DecorateFrame extends JFrame{
     private void updateMovesLabel() {
         moves = moves - 1;
         movesLabel.setText("Moves Left: " + moves);
+
+        if (moves == 10 || movesLabel.getText().equals("Moves Left: 10")) {
+            restartButton.setEnabled(false);
+        } else {
+            restartButton.setEnabled(true);
+        }
     }
 
     //transition to another tree (basta mu appear sha mu change) after makita niya ang snowflake or unsa

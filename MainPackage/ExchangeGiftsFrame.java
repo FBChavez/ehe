@@ -1,18 +1,14 @@
 package MainPackage;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import MainPackage.MenuFrame;
 
 public class ExchangeGiftsFrame extends JFrame {
     private ArrayList<String> lists;
@@ -28,7 +24,7 @@ public class ExchangeGiftsFrame extends JFrame {
                 "<center>Hey there, " + name + "!<br> Are you excited to know who your sugar daddy/mommy is sugar baby?</center>" +
                 "</html>";
 
-        ImageIcon gifIcon = new ImageIcon("manito-manita.jpg");
+        ImageIcon gifIcon = new ImageIcon("Photos/manito-manita.jpg");
         JLabel gifLabel = new JLabel(gifIcon);
 
         // Set the content pane to the JLabel

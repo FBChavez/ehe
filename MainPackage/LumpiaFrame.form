@@ -210,7 +210,7 @@
           <background color="-256"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <icon value="LUMPIA.png"/>
+          <icon value="Photos/LUMPIA.png"/>
           <text value=""/>
         </properties>
       </component>

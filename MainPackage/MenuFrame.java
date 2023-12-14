@@ -16,7 +16,7 @@ public class MenuFrame extends JFrame {
 
         // Set background color
 //        getContentPane().setBackground(new Color(173, 216, 230)); // Light blue color
-        ImageIcon gifIcon = new ImageIcon("bg2menu.gif");
+        ImageIcon gifIcon = new ImageIcon("Photos/bg2menu.gif");
         JLabel gifLabel = new JLabel(gifIcon);
 
         // Set the content pane to the JLabel

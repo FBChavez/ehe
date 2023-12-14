@@ -209,7 +209,7 @@
           <background color="-256"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <icon value="CARBONARA.png"/>
+          <icon value="Photos/CARBONARA.png"/>
           <text value=""/>
         </properties>
       </component>

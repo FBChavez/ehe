@@ -16,7 +16,7 @@ public class RecipeMenuFrame extends JFrame {
 
         // Set background color
 //        getContentPane().setBackground(new Color(173, 216, 230)); // Light blue color
-        ImageIcon gifIcon = new ImageIcon("kitchen2.gif");
+        ImageIcon gifIcon = new ImageIcon("Photos/kitchen2.gif");
         JLabel gifLabel = new JLabel(gifIcon);
 
         // Set the content pane to the JLabel

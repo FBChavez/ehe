@@ -1,7 +1,5 @@
 package MainPackage;
 
-import MainPackage.MenuFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +19,7 @@ public class WelcomeFrame extends JFrame {
         setLocationRelativeTo(null);
 
         // Create a JLabel to hold the GIF
-        ImageIcon gifIcon = new ImageIcon("bg.gif");
+        ImageIcon gifIcon = new ImageIcon("Photos/bg.gif");
         JLabel gifLabel = new JLabel(gifIcon);
 
         // Set the content pane to the JLabel
