@@ -73,8 +73,15 @@ public class DecorateFrame extends JFrame{
     private BufferedImage[] images ;
     private String name;
 
+    private void showGameMechanicsInfo() {
+        String message = "Look for the hidden snowflake to decorate the Christmas Tree. "
+                + "There are clues surrounding the hidden snowflake. Good Luck and Enjoy!";
+        JOptionPane.showMessageDialog(this, message, "Game Mechanics", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     DecorateFrame(String name){
         this.name = name;
+
         setSize(1122, 650);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -140,6 +147,7 @@ public class DecorateFrame extends JFrame{
 
         setVisible(true);
 
+        showGameMechanicsInfo();
     }
 
 //    currentImageIndex = 0;
@@ -221,7 +229,7 @@ public class DecorateFrame extends JFrame{
         btn.hiddenSnowflake();
 
         if (currentImageIndex != images.length - 1) {
-            JOptionPane.showMessageDialog(null, "You got the surprise decorator!");
+            JOptionPane.showMessageDialog(null, "You found a hidden ornament!");
             restartGame();
         } else {
             JOptionPane.showMessageDialog(null, "Well done, " + name + "! You have fully decorated the Christmas Tree!");
