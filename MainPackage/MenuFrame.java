@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.SwingUtilities.invokeLater;
-
 public class MenuFrame extends JFrame {
 
     public MenuFrame(String name) {
@@ -28,16 +26,6 @@ public class MenuFrame extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Create buttons with equal size
-
-//        JButton decorateButton = createButton("Decorate Virtual Christmas Tree");
-//        JButton recipesButton = createButton("Look for Christmas Recipes");
-//        JButton songsButton = createButton("Play Christmas Songs");
-//        JButton exchangeButton = createButton("Exchange Gifts");
-//        JButton rpgButton = createButton("Start an adventure");
-
-
 
         JButton decorateButton = createButton();
         ImageIcon decorBtn = new ImageIcon("iconBTN/decorate.png");
@@ -69,13 +57,13 @@ public class MenuFrame extends JFrame {
         Image imageG2 = imageG1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
         rpgButton.setIcon(new ImageIcon(imageG2));
 
-        // Add ActionListener to buttons
+        // Adding ActionListeners to buttons
         decorateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 DecorateFrame decorateFrame = new DecorateFrame(name);
-//                decorateFrame.setVisible(true);
+                decorateFrame.setVisible(true);
             }
         });
 
@@ -110,14 +98,12 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                invokeLater(() -> {
-                    GameFrame gameFrame= new GameFrame(name);
-                    gameFrame.setVisible(true);
-                });
+                GameFrame gameFrame= new GameFrame(name);
+                gameFrame.setVisible(true);
             }
         });
 
-        // Set layout and add components
+        // Setting the layout and adding components
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 

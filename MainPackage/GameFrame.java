@@ -4,21 +4,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 //Scene 1, 2, 3, 4 Done
 
 public class GameFrame extends JFrame{
 
-//    public static void main(String[] args) {
-//
-//        new GameFrame();
-//    }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            GameFrame gameFrame = new GameFrame("Trial");
+            gameFrame.setVisible(true);
+        });
+    }
 
     JFrame window;
     Container con;
@@ -26,112 +23,56 @@ public class GameFrame extends JFrame{
     JLabel titleNameLabel1, titleNameLabel2, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 60);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
-    // Note: Add functionality to the backButton to return to the menuFrame
+    // Note: Please add functionality to the backButton to return to the menuFrame
     JButton startButton, backButton, choice1, choice2, choice3, choice4;
     JTextArea mainTextArea;
     int playerHP, mentalHP, scene1EnemiesHP, frostyHP, scene4EnemiesHP, grinchHP, potions;
     String weapon, position;
 
-    TitleScreenHandler tsHandler;
     ChoiceHandler choiceHandler = new ChoiceHandler();
 
-    ImageIcon logo = new ImageIcon(".//res//jackfrost.jpg");
+    ImageIcon logo = new ImageIcon("iconBTN/sword.png");
 
     public GameFrame(String name){
-        tsHandler = new TitleScreenHandler(name);
-//        window = new JFrame();
-//        window.setSize(800, 600);
-//        window.setResizable(false);
-//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        // Loading background image
-//        ImageIcon backgroundImage = new ImageIcon("background/snowyforest.png");
-//        JLabel backgroundLabel = new JLabel(backgroundImage);
-//        backgroundLabel.setBounds(0, 0, 800, 600);
-//
-//        backgroundLabel.setOpaque(true);
-//
-//        con = window.getContentPane();
-//        con.setLayout(null);
-//
-//        // Setting icon image
-//        window.setIconImage(logo.getImage());
-//
-//        // Title
-//        titleNamePanel = new JPanel();
-//        titleNamePanel.setBounds(100, 100, 600, 150);
-////        titleNamePanel.setBackground(Color.black);
-//        titleNamePanel.setOpaque(false);
-//
-//        titleNameLabel1 = new JLabel("RESCUE MISSION:");
-//        titleNameLabel1.setForeground(Color.white);
-//        titleNameLabel1.setFont(titleFont);
-//
-//        titleNameLabel2 = new JLabel("SAVE THE PRESENTS");
-//        titleNameLabel2.setForeground(Color.white);
-//        titleNameLabel2.setFont(titleFont);
-//
-//        titleNamePanel.add(titleNameLabel1);
-//        titleNamePanel.add(titleNameLabel2);
-//
-//        // Start Button
-//        startButtonPanel = new JPanel();
-//        startButtonPanel.setBounds(300, 400, 200, 100);
-////        startButtonPanel.setBackground(Color.black);
-//        startButtonPanel.setOpaque(false);
-//
-//        startButton = new JButton("START");
-//        startButton.setBackground(Color.black);
-//        startButton.setForeground(Color.white);
-//
-//        startButton.setFont(normalFont);
-//        startButton.addActionListener(tsHandler);
-//        startButton.setFocusPainted(false);
-//
-//        startButtonPanel.add(startButton);
-//
-//        // Adding components to the content pane
-////        con.add(titleNamePanel);
-////        con.add(startButtonPanel);
-//        backgroundLabel.add(titleNamePanel);
-//        backgroundLabel.add(startButtonPanel);
-//        con.add(backgroundLabel);
-//
-//        // Displaying the "window" frame
-//        window.setVisible(true);
-        // Creating the frame
+        // The Frame
         window = new JFrame();
         window.setSize(800, 600);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
+        window.getContentPane().setBackground(new Color(251,244,233));
         window.setLayout(null);
         window.setIconImage(logo.getImage());
+
         con = window.getContentPane();
 
         // Title
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
-        titleNamePanel.setBackground(Color.black);
+        titleNamePanel.setBackground(new Color(251,244,233));
 
         titleNameLabel1 = new JLabel("RESCUE MISSION:");
-        titleNameLabel1.setForeground(Color.white);
+        titleNameLabel1.setForeground(new Color(133,23,29));
         titleNameLabel1.setFont(titleFont);
 
         titleNameLabel2 = new JLabel("SAVE THE PRESENTS");
-        titleNameLabel2.setForeground(Color.white);
+        titleNameLabel2.setForeground(new Color(133,23,29));
         titleNameLabel2.setFont(titleFont);
 
         // Start Button
         startButtonPanel = new JPanel();
         startButtonPanel.setBounds(300, 400, 200, 100);
-        startButtonPanel.setBackground(Color.black);
+        startButtonPanel.setBackground(new Color(251,244,233));
 
         startButton = new JButton("START");
-        startButton.setBackground(Color.black);
+        startButton.setBackground(new Color(52,63,55));
         startButton.setForeground(Color.white);
         startButton.setFont(normalFont);
-        startButton.addActionListener(tsHandler);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createGameScreen(name);
+            }
+        });
         startButton.setFocusPainted(false);
 
         titleNamePanel.add(titleNameLabel1);
@@ -151,13 +92,13 @@ public class GameFrame extends JFrame{
 
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.black);
+        mainTextPanel.setBackground(new Color(251,244,233));
         con.add(mainTextPanel);
 
         mainTextArea = new JTextArea("Main text area");
         mainTextArea.setBounds(100, 100, 600, 250);
-        mainTextArea.setBackground(Color.black);
-        mainTextArea.setForeground(Color.white);
+        mainTextArea.setBackground(new Color(251,244,233));
+        mainTextArea.setForeground(new Color(52,63,55));
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
         mainTextArea.setWrapStyleWord(true);
@@ -167,12 +108,12 @@ public class GameFrame extends JFrame{
 
         choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 350, 300, 150);
-        choiceButtonPanel.setBackground(Color.black);
+        choiceButtonPanel.setBackground(new Color(251,244,233));
         choiceButtonPanel.setLayout(new GridLayout(4,1));
         con.add(choiceButtonPanel);
 
         choice1 = new JButton("Choice 1");
-        choice1.setBackground(Color.black);
+        choice1.setBackground(new Color(52,63,55));
         choice1.setForeground(Color.white);
         choice1.setFont(normalFont);
         choice1.setFocusPainted(false);
@@ -181,7 +122,7 @@ public class GameFrame extends JFrame{
         choiceButtonPanel.add(choice1);
 
         choice2 = new JButton("Choice 2");
-        choice2.setBackground(Color.black);
+        choice2.setBackground(new Color(52,63,55));
         choice2.setForeground(Color.white);
         choice2.setFont(normalFont);
         choice2.setFocusPainted(false);
@@ -190,7 +131,7 @@ public class GameFrame extends JFrame{
         choiceButtonPanel.add(choice2);
 
         choice3 = new JButton("Choice 3");
-        choice3.setBackground(Color.black);
+        choice3.setBackground(new Color(52,63,55));
         choice3.setForeground(Color.white);
         choice3.setFont(normalFont);
         choice3.setFocusPainted(false);
@@ -199,7 +140,7 @@ public class GameFrame extends JFrame{
         choiceButtonPanel.add(choice3);
 
         choice4 = new JButton("Choice 4");
-        choice4.setBackground(Color.black);
+        choice4.setBackground(new Color(52,63,55));
         choice4.setForeground(Color.white);
         choice4.setFont(normalFont);
         choice4.setFocusPainted(false);
@@ -211,7 +152,7 @@ public class GameFrame extends JFrame{
 
         playerPanel = new JPanel();
         playerPanel.setBounds(100, 15, 600, 50);
-        playerPanel.setBackground(Color.black);
+        playerPanel.setBackground(new Color(52,63,55));
         playerPanel.setLayout(new GridLayout(1,5));
 
         con.add(playerPanel);
@@ -223,7 +164,7 @@ public class GameFrame extends JFrame{
 
         hpLabelNumber = new JLabel();
         hpLabelNumber.setFont(normalFont);
-        hpLabelNumber.setForeground(Color.white);
+        hpLabelNumber.setForeground(new Color(196, 120, 123));
         playerPanel.add(hpLabelNumber);
 
         weaponLabel = new JLabel("Weapon:");
@@ -234,12 +175,12 @@ public class GameFrame extends JFrame{
         playerPanel.add(weaponLabel);
         weaponLabelName = new JLabel();
         weaponLabelName.setFont(normalFont);
-        weaponLabelName.setForeground(Color.white);
+        weaponLabelName.setForeground(new Color(196, 120, 123));
         playerPanel.add(weaponLabelName);
 
         // Back Button
         backButton = new JButton("Back");
-        backButton.setBackground(Color.black);
+        backButton.setBackground(new Color(52,63,55));
         backButton.setForeground(Color.white);
         backButton.setFont(normalFont);
 
@@ -247,8 +188,8 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Adding the logic to navigate back to the menuFrame
-//                dispose();
-                window.setVisible(false);
+                window.dispose();
+//                window.setVisible(false);
                 MenuFrame menuFrame = new MenuFrame(name);
                 menuFrame.setVisible(true);
             }
@@ -1225,18 +1166,6 @@ public class GameFrame extends JFrame{
         choice2.setVisible(false);
         choice3.setVisible(false);
         choice4.setVisible(false);
-    }
-
-    public class TitleScreenHandler implements ActionListener{
-        String name;
-
-        public TitleScreenHandler(String name) {
-            this.name = name;
-        }
-
-        public void actionPerformed(ActionEvent event){
-            createGameScreen(name);
-        }
     }
 
     public class ChoiceHandler implements ActionListener{
