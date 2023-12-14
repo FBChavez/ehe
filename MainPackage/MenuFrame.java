@@ -57,6 +57,11 @@ public class MenuFrame extends JFrame {
         Image imageG2 = imageG1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
         rpgButton.setIcon(new ImageIcon(imageG2));
 
+        decorateButton.setBackground(Color.decode("#FBF4E9"));
+        recipesButton.setBackground(Color.decode("#FBF4E9"));
+        songsButton.setBackground(Color.decode("#FBF4E9"));
+        exchangeButton.setBackground(Color.decode("#FBF4E9"));
+        rpgButton.setBackground(Color.decode("#FBF4E9"));
         // Adding ActionListeners to buttons
         decorateButton.addActionListener(new ActionListener() {
             @Override
