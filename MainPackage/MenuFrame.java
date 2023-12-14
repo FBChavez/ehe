@@ -62,6 +62,7 @@ public class MenuFrame extends JFrame {
         songsButton.setBackground(Color.decode("#FBF4E9"));
         exchangeButton.setBackground(Color.decode("#FBF4E9"));
         rpgButton.setBackground(Color.decode("#FBF4E9"));
+
         // Adding ActionListeners to buttons
         decorateButton.addActionListener(new ActionListener() {
             @Override
