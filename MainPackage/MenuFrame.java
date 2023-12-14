@@ -81,7 +81,7 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                RecipeFrame recipesFrame = new RecipeFrame(name);
+                RecipeMenuFrame recipesFrame = new RecipeMenuFrame(name);
                 recipesFrame.setVisible(true);
             }
         });
