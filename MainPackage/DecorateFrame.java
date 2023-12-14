@@ -129,6 +129,11 @@ public class DecorateFrame extends JFrame{
         backgroundLabel.add(boardPanel, BorderLayout.CENTER);
         backgroundLabel.add(buttonPanel, BorderLayout.SOUTH);
 
+        restartButton.setBackground(Color.decode("#1E8449")); // Set a color for the restart button using a hexadecimal code
+        restartButton.setForeground(Color.WHITE); // Set text color for restart button
+        backButton.setBackground(Color.decode("#D35400")); // Set a color for the back button using a hexadecimal code
+        backButton.setForeground(Color.WHITE);
+
         getContentPane().add(backgroundLabel);
 
         setVisible(true);

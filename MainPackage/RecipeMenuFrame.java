@@ -67,9 +67,14 @@ public class RecipeMenuFrame extends JFrame {
         Image imageG2 = imageG1.getScaledInstance(300, 50, Image.SCALE_SMOOTH);
         pastaBtn.setIcon(new ImageIcon(imageG2));
 
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Back to Main Menu");
         backButton.setPreferredSize(new Dimension(300, 50));
-
+        bukopandanBtn.setBackground(new Color(173, 216, 230)); // Light blue color
+        lecheflanBtn.setBackground(new Color(255, 192, 203)); // Pink color
+        lechonkawaliBtn.setBackground(new Color(144, 238, 144)); // Light green color
+        lumpiaBtn.setBackground(new Color(255, 215, 0)); // Gold color
+        pastaBtn.setBackground(new Color(255, 182, 193)); // Light pink color
+        backButton.setBackground(new Color(255, 99, 71)); // Tomato red color
 
         // Add ActionListener to buttons
         bukopandanBtn.addActionListener(new ActionListener() {
