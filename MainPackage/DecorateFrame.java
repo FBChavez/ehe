@@ -101,11 +101,11 @@ public class DecorateFrame extends JFrame{
             e.printStackTrace();
         }
 
-        currentImageIndex = 0;
-        setImage(images[currentImageIndex]); //para saa images
-
-        boardPanel.setLayout(new GridLayout(numRows, numCols));
-        boardPanel.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200)); //murag ni sha margin sa boardPanel
+//        currentImageIndex = 0;
+//        setImage(images[currentImageIndex]); //para saa images
+//
+//        boardPanel.setLayout(new GridLayout(numRows, numCols));
+//        boardPanel.setBorder(BorderFactory.createEmptyBorder(20, 200, 20, 200)); //murag ni sha margin sa boardPanel
         add(boardPanel);
         // Add buttons and moves label
         JPanel buttonPanel = new JPanel();
@@ -167,8 +167,8 @@ public class DecorateFrame extends JFrame{
                 btn.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
+                        if (btn.isEnabled())updateMovesLabel();
                         btn.setEnabled(false);
-                        updateMovesLabel();
                         handleButtonClick(btn);
                     }
                 });
