@@ -18,6 +18,7 @@ interface ButtonDecorate {
 
 public class DecorateFrame extends JFrame{
 
+    // Decorator
     private class HiddenSnowflake implements ButtonDecorate{
         private final Buttons b;
 
@@ -31,6 +32,7 @@ public class DecorateFrame extends JFrame{
         }
     }
 
+    // Concrete Component
     private class Buttons extends JButton {
         private ButtonDecorate decorate;
         int r;
