@@ -49,29 +49,27 @@ public class SongsFrame extends JFrame {
         JButton playButton = new JButton("Play");
         JButton pauseButton = new JButton("Pause");
         JButton backButton = new JButton("Back");
-        JButton shuffleButton = new JButton("Shuffle");
+        JButton shuffleButton = new JButton("Random");
 
         playButton.setPreferredSize(new Dimension(80, 30));
         pauseButton.setPreferredSize(new Dimension(80, 30));
         backButton.setPreferredSize(new Dimension(80, 30));
         shuffleButton.setPreferredSize(new Dimension(80, 30));
-        //Kani para sa colors nila
-//        playButton.setBackground(Color.decode("#343F37"));
-//        pauseButton.setBackground(Color.decode("#343F37"));
-//        backButton.setBackground(Color.decode("#343F37"));
-//        shuffleButton.setBackground(Color.decode("#343F37"));
-        playButton.setBackground(Color.decode("#85171D")); // Set the background color using a hexadecimal code
-        pauseButton.setBackground(Color.decode("#343F37")); // Customize the color for the pause button
-        backButton.setBackground(Color.decode("#c8ae9a")); // Customize the color for the back button
+
+        playButton.setBackground(Color.decode("#85171D"));
+        pauseButton.setBackground(Color.decode("#343F37"));
+        backButton.setBackground(Color.decode("#c8ae9a"));
         shuffleButton.setBackground(Color.decode("#581845"));
 
         playButton.setForeground(Color.decode("#FBF4E9"));
         pauseButton.setForeground(Color.decode("#FBF4E9"));
         backButton.setForeground(Color.decode("#FBF4E9"));
         shuffleButton.setForeground(Color.decode("#FBF4E9"));
+
         pauseButton.setEnabled(false);
 
         playButton.addActionListener(e -> {
+            stopSong();
             playSelectedSong();
             playButton.setEnabled(false);
             pauseButton.setEnabled(true);
@@ -87,7 +85,7 @@ public class SongsFrame extends JFrame {
             pauseSelectedSong();
             playButton.setEnabled(true);
             pauseButton.setEnabled(false);
-            progressBar.setValue(0); // Reset progress bar when a new song is selected
+            progressBar.setValue(0);
         });
 
         backButton.addActionListener(e -> {
@@ -98,11 +96,12 @@ public class SongsFrame extends JFrame {
         });
 
         shuffleButton.addActionListener(e -> {
-            pauseSelectedSong(); // Pause if currently playing
+            playButton.setEnabled(true);
+            pauseButton.setEnabled(false);
             stopSong();
 
-            progressBar.setValue(0); // Reset progress bar for shuffle
-            playRandomSongOnce();
+            progressBar.setValue(0);
+            playRandomSong();
 
         });
 
@@ -112,46 +111,19 @@ public class SongsFrame extends JFrame {
         progressBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (clip != null) { // Add a null check for clip
-                    int mouseX = e.getX();
-                    double width = progressBar.getWidth();
-                    double newPercentage = (mouseX / width) * 100;
-                    progressBar.setValue((int) newPercentage);
-                    if (clip.getMicrosecondLength() != 0) { // Check if clip's length is not zero
-                        clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
-                        clip.setMicrosecondPosition(clipTimePosition);
-                    }
-                    isDragging = true;
-                }
+                handleProgressBarMousePress(e);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (isDragging && clip != null) { // Add null check for clip
-                    int mouseX = e.getX();
-                    double width = progressBar.getWidth();
-                    double newPercentage = (mouseX / width) * 100;
-                    progressBar.setValue((int) newPercentage);
-                    if (clip.getMicrosecondLength() != 0) { // Check if clip's length is not zero
-                        clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
-                        clip.setMicrosecondPosition(clipTimePosition);
-                    }
-                    isDragging = false;
-                }
+                handleProgressBarMouseRelease(e);
             }
         });
 
         progressBar.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (isDragging) {
-                    int mouseX = e.getX();
-                    double width = progressBar.getWidth();
-                    double newPercentage = (mouseX / width) * 100;
-                    progressBar.setValue((int) newPercentage);
-                    clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
-                    clip.setMicrosecondPosition(clipTimePosition);
-                }
+                handleProgressBarMouseDrag(e);
             }
         });
 
@@ -162,7 +134,6 @@ public class SongsFrame extends JFrame {
 
         progressPanel.add(progressBar, BorderLayout.CENTER);
 
-        //Create ug laing panel para sa title
         JPanel songsListPanel = new JPanel(new BorderLayout());
         songsListPanel.setPreferredSize(new Dimension(400, 130));
         songsListPanel.setBorder(BorderFactory.createTitledBorder("Christmas Songs List"));
@@ -176,15 +147,54 @@ public class SongsFrame extends JFrame {
 
         getContentPane().add(contentPanel);
     }
-    private void playRandomSongOnce() {
+
+    private void handleProgressBarMousePress(MouseEvent e) {
+        if (clip != null) {
+            int mouseX = e.getX();
+            double width = progressBar.getWidth();
+            double newPercentage = (mouseX / width) * 100;
+            progressBar.setValue((int) newPercentage);
+            if (clip.getMicrosecondLength() != 0) {
+                clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                clip.setMicrosecondPosition(clipTimePosition);
+            }
+            isDragging = true;
+        }
+    }
+
+    private void handleProgressBarMouseRelease(MouseEvent e) {
+        if (isDragging && clip != null) {
+            int mouseX = e.getX();
+            double width = progressBar.getWidth();
+            double newPercentage = (mouseX / width) * 100;
+            progressBar.setValue((int) newPercentage);
+            if (clip.getMicrosecondLength() != 0) {
+                clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+                clip.setMicrosecondPosition(clipTimePosition);
+            }
+            isDragging = false;
+        }
+    }
+
+    private void handleProgressBarMouseDrag(MouseEvent e) {
+        if (isDragging) {
+            int mouseX = e.getX();
+            double width = progressBar.getWidth();
+            double newPercentage = (mouseX / width) * 100;
+            progressBar.setValue((int) newPercentage);
+            clipTimePosition = (long) ((newPercentage / 100.0) * clip.getMicrosecondLength());
+            clip.setMicrosecondPosition(clipTimePosition);
+        }
+    }
+
+    private void playRandomSong() {
         List<String> songList = Collections.list(listModel.elements());
         Collections.shuffle(songList);
         String randomSong = songList.get(new Random().nextInt(songList.size()));
-        songsList.setSelectedValue(randomSong, true);
 
         clipTimePosition = 0;
 
-        isShufflePlaying = true;
+        songsList.setSelectedValue(randomSong, true);
         playSelectedSong();
     }
 
@@ -225,26 +235,14 @@ public class SongsFrame extends JFrame {
         if (clip != null && clip.isRunning()) {
             clipTimePosition = clip.getMicrosecondPosition();
             clip.stop();
-            if (isShufflePlaying) {
-                isShufflePlaying = false;
-            }
         }
     }
-
 
     private void stopSong() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
         }
     }
-
-//    private void playRandomSong() {
-//        List<String> songList = Collections.list(listModel.elements());
-//        Collections.shuffle(songList);
-//        String randomSong = songList.get(new Random().nextInt(songList.size()));
-//        songsList.setSelectedValue(randomSong, true);
-//        playSelectedSong();
-//    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
