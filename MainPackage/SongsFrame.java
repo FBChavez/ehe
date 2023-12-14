@@ -86,7 +86,7 @@ public class SongsFrame extends JFrame {
         shuffleButton.addActionListener(e -> {
             stopSong();
             progressBar.setValue(0); // Reset progress bar for shuffle
-            playRandomSong();
+            playRandomSongOnce();
         });
 
         progressBar = new JProgressBar(0, 100);
@@ -160,7 +160,13 @@ public class SongsFrame extends JFrame {
 
         getContentPane().add(contentPanel);
     }
-
+    private void playRandomSongOnce() {
+        List<String> songList = Collections.list(listModel.elements());
+        Collections.shuffle(songList);
+        String randomSong = songList.get(new Random().nextInt(songList.size()));
+        songsList.setSelectedValue(randomSong, true);
+        playSelectedSong();
+    }
     private void playSelectedSong() {
         String selectedSong = songsList.getSelectedValue();
         if (selectedSong != null) {
