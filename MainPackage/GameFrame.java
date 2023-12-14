@@ -39,29 +39,80 @@ public class GameFrame extends JFrame{
 
     public GameFrame(String name){
         tsHandler = new TitleScreenHandler(name);
+//        window = new JFrame();
+//        window.setSize(800, 600);
+//        window.setResizable(false);
+//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        // Loading background image
+//        ImageIcon backgroundImage = new ImageIcon("background/snowyforest.png");
+//        JLabel backgroundLabel = new JLabel(backgroundImage);
+//        backgroundLabel.setBounds(0, 0, 800, 600);
+//
+//        backgroundLabel.setOpaque(true);
+//
+//        con = window.getContentPane();
+//        con.setLayout(null);
+//
+//        // Setting icon image
+//        window.setIconImage(logo.getImage());
+//
+//        // Title
+//        titleNamePanel = new JPanel();
+//        titleNamePanel.setBounds(100, 100, 600, 150);
+////        titleNamePanel.setBackground(Color.black);
+//        titleNamePanel.setOpaque(false);
+//
+//        titleNameLabel1 = new JLabel("RESCUE MISSION:");
+//        titleNameLabel1.setForeground(Color.white);
+//        titleNameLabel1.setFont(titleFont);
+//
+//        titleNameLabel2 = new JLabel("SAVE THE PRESENTS");
+//        titleNameLabel2.setForeground(Color.white);
+//        titleNameLabel2.setFont(titleFont);
+//
+//        titleNamePanel.add(titleNameLabel1);
+//        titleNamePanel.add(titleNameLabel2);
+//
+//        // Start Button
+//        startButtonPanel = new JPanel();
+//        startButtonPanel.setBounds(300, 400, 200, 100);
+////        startButtonPanel.setBackground(Color.black);
+//        startButtonPanel.setOpaque(false);
+//
+//        startButton = new JButton("START");
+//        startButton.setBackground(Color.black);
+//        startButton.setForeground(Color.white);
+//
+//        startButton.setFont(normalFont);
+//        startButton.addActionListener(tsHandler);
+//        startButton.setFocusPainted(false);
+//
+//        startButtonPanel.add(startButton);
+//
+//        // Adding components to the content pane
+////        con.add(titleNamePanel);
+////        con.add(startButtonPanel);
+//        backgroundLabel.add(titleNamePanel);
+//        backgroundLabel.add(startButtonPanel);
+//        con.add(backgroundLabel);
+//
+//        // Displaying the "window" frame
+//        window.setVisible(true);
+        // Creating the frame
         window = new JFrame();
         window.setSize(800, 600);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Loading background image
-        ImageIcon backgroundImage = new ImageIcon("background/snowyforest.png");
-        JLabel backgroundLabel = new JLabel(backgroundImage);
-        backgroundLabel.setBounds(0, 0, 800, 600);
-
-        backgroundLabel.setOpaque(true);
-
-        con = window.getContentPane();
-        con.setLayout(null);
-
-        // Setting icon image
+        window.getContentPane().setBackground(Color.black);
+        window.setLayout(null);
         window.setIconImage(logo.getImage());
+        con = window.getContentPane();
 
         // Title
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
-//        titleNamePanel.setBackground(Color.black);
-        titleNamePanel.setOpaque(false);
+        titleNamePanel.setBackground(Color.black);
 
         titleNameLabel1 = new JLabel("RESCUE MISSION:");
         titleNameLabel1.setForeground(Color.white);
@@ -71,33 +122,26 @@ public class GameFrame extends JFrame{
         titleNameLabel2.setForeground(Color.white);
         titleNameLabel2.setFont(titleFont);
 
-        titleNamePanel.add(titleNameLabel1);
-        titleNamePanel.add(titleNameLabel2);
-
         // Start Button
         startButtonPanel = new JPanel();
         startButtonPanel.setBounds(300, 400, 200, 100);
-//        startButtonPanel.setBackground(Color.black);
-        startButtonPanel.setOpaque(false);
+        startButtonPanel.setBackground(Color.black);
 
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
         startButton.setForeground(Color.white);
-
         startButton.setFont(normalFont);
         startButton.addActionListener(tsHandler);
         startButton.setFocusPainted(false);
 
+        titleNamePanel.add(titleNameLabel1);
+        titleNamePanel.add(titleNameLabel2);
         startButtonPanel.add(startButton);
 
-        // Adding components to the content pane
-//        con.add(titleNamePanel);
-//        con.add(startButtonPanel);
-        backgroundLabel.add(titleNamePanel);
-        backgroundLabel.add(startButtonPanel);
-        con.add(backgroundLabel);
+        con.add(titleNamePanel);
+        con.add(startButtonPanel);
 
-        // Displaying the "window" frame
+        // displaying the "window" frame
         window.setVisible(true);
     }
 
