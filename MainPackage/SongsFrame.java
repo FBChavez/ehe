@@ -16,11 +16,12 @@ public class SongsFrame extends JFrame {
     private long clipTimePosition = 0;
     private JProgressBar progressBar;
     private boolean isDragging = false;
+    private boolean isShufflePlaying = false;
 
     public SongsFrame(String name) {
         setTitle("Music Player");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 400);
+        setSize(600, 250);
         setLocationRelativeTo(null);
 
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -54,7 +55,20 @@ public class SongsFrame extends JFrame {
         pauseButton.setPreferredSize(new Dimension(80, 30));
         backButton.setPreferredSize(new Dimension(80, 30));
         shuffleButton.setPreferredSize(new Dimension(80, 30));
+        //Kani para sa colors nila
+//        playButton.setBackground(Color.decode("#343F37"));
+//        pauseButton.setBackground(Color.decode("#343F37"));
+//        backButton.setBackground(Color.decode("#343F37"));
+//        shuffleButton.setBackground(Color.decode("#343F37"));
+        playButton.setBackground(Color.decode("#85171D")); // Set the background color using a hexadecimal code
+        pauseButton.setBackground(Color.decode("#343F37")); // Customize the color for the pause button
+        backButton.setBackground(Color.decode("#c8ae9a")); // Customize the color for the back button
+        shuffleButton.setBackground(Color.decode("#581845"));
 
+        playButton.setForeground(Color.decode("#FBF4E9"));
+        pauseButton.setForeground(Color.decode("#FBF4E9"));
+        backButton.setForeground(Color.decode("#FBF4E9"));
+        shuffleButton.setForeground(Color.decode("#FBF4E9"));
         pauseButton.setEnabled(false);
 
         playButton.addActionListener(e -> {
@@ -84,6 +98,7 @@ public class SongsFrame extends JFrame {
         });
 
         shuffleButton.addActionListener(e -> {
+            pauseSelectedSong(); // Pause if currently playing
             stopSong();
             progressBar.setValue(0); // Reset progress bar for shuffle
             playRandomSongOnce();
@@ -91,7 +106,7 @@ public class SongsFrame extends JFrame {
 
         progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(true);
-
+        progressBar.setPreferredSize(new Dimension(progressBar.getPreferredSize().width, 50));
         progressBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -145,15 +160,14 @@ public class SongsFrame extends JFrame {
 
         progressPanel.add(progressBar, BorderLayout.CENTER);
 
-        // Create a panel for the song list with a scroll pane
+        //Create ug laing panel para sa title
         JPanel songsListPanel = new JPanel(new BorderLayout());
         songsListPanel.setPreferredSize(new Dimension(400, 130));
-        songsListPanel.setBorder(BorderFactory.createTitledBorder("Cristmas Songs List"));
+        songsListPanel.setBorder(BorderFactory.createTitledBorder("Christmas Songs List"));
 
         JScrollPane songsScrollPane = new JScrollPane(songsList);
         songsListPanel.add(songsScrollPane, BorderLayout.CENTER);
 
-        // Add the song list panel to the content panel
         contentPanel.add(songsListPanel, BorderLayout.NORTH);
         contentPanel.add(progressPanel, BorderLayout.CENTER);
         contentPanel.add(controlPanel, BorderLayout.SOUTH);
@@ -165,8 +179,10 @@ public class SongsFrame extends JFrame {
         Collections.shuffle(songList);
         String randomSong = songList.get(new Random().nextInt(songList.size()));
         songsList.setSelectedValue(randomSong, true);
+        isShufflePlaying = true;
         playSelectedSong();
     }
+
     private void playSelectedSong() {
         String selectedSong = songsList.getSelectedValue();
         if (selectedSong != null) {
@@ -204,8 +220,12 @@ public class SongsFrame extends JFrame {
         if (clip != null && clip.isRunning()) {
             clipTimePosition = clip.getMicrosecondPosition();
             clip.stop();
+            if (isShufflePlaying) {
+                isShufflePlaying = false;
+            }
         }
     }
+
 
     private void stopSong() {
         if (clip != null && clip.isRunning()) {
