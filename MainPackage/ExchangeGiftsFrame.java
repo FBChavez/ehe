@@ -25,7 +25,7 @@ public class ExchangeGiftsFrame extends JFrame {
         setLocationRelativeTo(null);
 
         String lbl = "<html>" +
-                "<center>Hey there, " + name + "!<br> Are you excited to know who your manito/manita is?</center>" +
+                "<center>Hey there, " + name + "!<br> Are you excited to know who your sugar daddy/mommy is sugar baby?</center>" +
                 "</html>";
 
         ImageIcon gifIcon = new ImageIcon("manito-manita.jpg");
